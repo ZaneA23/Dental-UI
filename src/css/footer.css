@@ -1,0 +1,73 @@
+footer{
+    color: #fff;
+    font-family: 'roboto';
+}
+
+
+#container {
+    margin-top: 50px;
+}
+
+
+.quick li a {
+    font-size: 23px;
+}
+
+.list-unstyled li a{
+    color: rgba(255, 255, 255, 0.9);
+}
+
+#flex img{
+    display: block;
+    height: 100px;
+    width: 100px;
+    margin-right: 15px;
+    margin-top: 10px;
+}
+
+.block-21 .text{
+    width: calc(100% - 100px);
+}
+
+.ftco-footer .block-21 .text .heading a {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.text h3{
+    font-size: 25px;
+}
+
+/* Footer */
+
+#social{
+    margin-top: 50px;
+}
+
+#social h2{
+    margin-bottom: 20px;
+}
+
+#social ul{
+    display: flex;
+}
+
+#social ul li{
+    margin: 5px 20px;
+}
+
+.meta{
+    display: flex;
+}
+
+.meta div{
+    margin-left: 10px;
+    font-size: 13px;
+}
+
+.meta div a{
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.block-23 ul li{
+    margin: 25px 10px;
+}

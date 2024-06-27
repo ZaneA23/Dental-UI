@@ -34,7 +34,7 @@ export default function Register() {
                     toast.success(res?.message ?? "Account has been registered")
                     setCookie("AUTH_TOKEN", res.data.token)
                     dispatch(login(res.data))
-                    navigate("/")
+                    navigate("/Dashboard")
                 }else{
                     toast.error(res?.message ?? "Something went wrong.")
                     setWarnings(res?.errors)

@@ -22,7 +22,7 @@ export default function Login() {
             if(res?.ok){
                 setCookie("AUTH_TOKEN", res.data.token)
                 dispatch(login(res.data))
-                navigate("/")
+                navigate("/Dashboard")
                 toast.success(res?.message ?? "Logged in Successfully")
             } else{
                 toast.error(res?.message ?? "Something went Wrong")

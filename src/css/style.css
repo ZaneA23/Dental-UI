@@ -1,0 +1,209 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto';
+}
+
+body{
+  background-color: azure;
+}
+
+/* NAVBAR */
+
+#navibar{
+  opacity: 0.9;
+}
+
+#navbrand{
+  font-size: xx-large;
+}
+
+#basic-navbar-nav{
+  text-align: center;
+}
+
+
+.navbar-nav{
+  margin: auto;
+  font-size: large;
+}
+
+/* Carousel */
+
+#img1{
+  height: 100vh;
+  object-fit: cover;
+  filter: brightness(0.7);
+}
+
+#img2{
+  height: 100vh;
+  object-fit: cover;
+  filter: brightness(0.7);
+}
+
+#carousel-caption{
+  bottom: 12rem;
+  z-index: 10;
+  margin-bottom: 250px;
+}
+
+#carousel-caption h1{
+  font-size: 7ch;
+}
+
+#carousel-caption p{
+  font-size: 2.5ch;
+}
+
+#about2{
+  background-image: url(../pages/images/about-2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#serve img{
+  height: 100px;
+  width: 100px;
+}
+
+#section2{
+  margin: 50px 0px;
+}
+
+.container-wrap{
+  background: rgb(3,146,166);
+  background: -webkit-linear-gradient(-45deg, #2f89fc 0%, #2cbcbc 100%);
+  color: #fff;
+}
+
+.heading-section{
+  margin: 45px;
+}
+
+.heading-section h2{
+  font-size: 50px;
+}
+
+
+.icon-check2 img{
+  height: 75px;
+  width: 75px;
+  margin: 10px;
+  border-radius: 50%;
+}
+
+.staff {
+  border: 1px transparent black;
+  box-shadow: 5px 5px 5px ;
+  background-color: #fff;
+}
+
+.staff ul{
+  margin-left: 25px;
+}
+
+.staff ul li {
+  margin-left: 10px;
+}
+
+#doctors{
+  text-align: center;
+  margin: 5px;
+}
+
+#doctors img{
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}
+
+.text ul{
+  display: flex;
+}
+
+.text ul li{
+  list-style-type: none;
+  padding: 0px 10px;
+}
+
+.heading{
+  color: #2f89fc;
+}
+
+#smile{
+  color: #2f89fc;
+}
+
+#meet h2{
+  color: #2f89fc;
+}
+
+/* Section 4*/
+
+#section-counter{
+  background-image: url(../pages/images/bg_1.jpg);
+}
+
+#achieve{
+  background-color: #2f89fc;
+}
+
+#achieve-text{
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.block-18{
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.number{
+  font-size: 50px;
+}
+
+/* SECTION 5 TESTY */
+
+.testimony-section h2{
+  color: #2f89fc;
+}
+
+#testy{
+  height: 100px;
+  width: 100px;
+  margin: auto;
+  border-radius: 50%;
+}
+
+.testimony-wrap{
+  width: 500px;
+  height: 400px;
+  margin: auto;
+  background-color: #2cbcbc;
+  color: #fff;
+  border-radius: 20px;
+}
+
+
+
+/* ABOUT PAGE */
+
+.home-item{
+  background-image: url(../pages/images/bg_1.jpg);
+  height: 40vh;
+}
+
+#aboutus {
+  background-image: url(../pages/images/about.jpg);
+  background-size: cover;
+}
+
+
+/* SERVICES PAGE */
+
+.slider-item{
+  background-image: url(../pages/images/bg_1.jpg);
+}
+
+/* DOCTORS PAGE */
+
