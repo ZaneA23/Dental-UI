@@ -6,6 +6,7 @@ import { register } from '../api/auth'
 import { useDispatch } from 'react-redux'
 import { useCookies } from 'react-cookie'
 import { toast } from 'react-toastify'
+import { login } from '../redux/authSlice'
 
 export default function Register() {
 
@@ -26,15 +27,18 @@ export default function Register() {
                 first_name: $("#first_name").val(),
                 last_name: $("#last_name").val(),
                 middle_name: $("#middle_name").val(),
+                contact: $("#contact").val(),
+                address: $("#address").val(),
                 birth_date: $("#birth_date").val()
             }
             setLoading(true)
             register(body).then(res => {
+                console.log(res)
                 if(res?.ok){
                     toast.success(res?.message ?? "Account has been registered")
                     setCookie("AUTH_TOKEN", res.data.token)
                     dispatch(login(res.data))
-                    navigate("/Dashboard")
+                    navigate("/Home")
                 }else{
                     toast.error(res?.message ?? "Something went wrong.")
                     setWarnings(res?.errors)
@@ -105,6 +109,22 @@ export default function Register() {
                     }
                 </Box>
                 <Box sx={{mt: 1}}>
+                    <TextField id="contact" fullWidth size="small" label="Contact" />
+                    {
+                       warnings?.contact ? (
+                            <Typography sx={{fontSize: 12}} component="small" color="error">{warnings.contact}</Typography>
+                        ) : null
+                    }
+                </Box>
+                <Box sx={{mt: 1}}>
+                    <TextField id="address" fullWidth size="small" label="Address" />
+                    {
+                       warnings?.address ? (
+                            <Typography sx={{fontSize: 12}} component="small" color="error">{warnings.address}</Typography>
+                        ) : null
+                    }
+                </Box>
+                <Box sx={{mt: 1}}>
                     <TextField required id="birth_date" fullWidth size="small" type="date" />
                     {
                        warnings?.birth_date ? (
@@ -113,7 +133,7 @@ export default function Register() {
                     }
                 </Box>
                 <Box sx={{mt: 1, textAlign: 'center'}}>
-                    <Button disabled={loading} type="submit" variant="contained">Login</Button>
+                    <Button disabled={loading} type="submit" variant="contained">Register</Button>
                 </Box>
             </Box>
             <Box sx={{mt: 2, textAlign: 'center'}}>

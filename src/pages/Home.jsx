@@ -1,12 +1,14 @@
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import checkAuth from '../hoc/checkAuth'
 import { DataGrid } from '@mui/x-data-grid'
 import { useCookies } from 'react-cookie'
 import { destroy, index, store, update } from '../api/user'
 import { toast } from 'react-toastify'
 import $ from 'jquery'
+import { logout } from '../redux/authSlice'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 function Home() {
     const [rows, setRows] = useState([])
@@ -17,6 +19,8 @@ function Home() {
     const [editDialog, setEditDialog] = useState(null)
     const user = useSelector(state => state.auth.user)
     const [cookies, setCookie, removeCookie] = useCookies()
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const columns = [
         {field: 'id', headerName: 'ID'},
         {field: 'name', headerName: 'Username'},
@@ -24,6 +28,8 @@ function Home() {
         {field: 'first_name', headerName: 'First Name'},
         {field: 'middle_name', headerName: 'Middle Name'},
         {field: 'last_name', headerName: 'Last Name'},
+        {field: 'contact', headerName: 'Contact'},
+        {field: 'address', headerName: 'Address'},
         {field: 'birth_date', headerName: 'Birth Date'},
         {field: 'actions', headerName: '', sortable: false, filterable: false, renderCell: params => (
             <Box sx={{display: 'flex', gap: 1, justifyContent: 'center', alignItems: 'center', height: '100%'}}>
@@ -32,6 +38,13 @@ function Home() {
             </Box>
         ), minWidth: 200, hideable: false} 
     ]
+
+    const onLogout = () => {
+        removeCookie("AUTH_TOKEN")
+        dispatch(logout())
+        navigate("/login")
+        toast.success("Logged Out!")
+    } 
     
     const refreshData = () => {
         index(cookies.AUTH_TOKEN).then(res => {
@@ -59,6 +72,8 @@ function Home() {
                 first_name: $("#first_name").val(),
                 last_name: $("#last_name").val(),
                 middle_name: $("#middle_name").val(),
+                contact: $("#contact").val(),
+                address: $("#address").val(),
                 birth_date: $("#birth_date").val()
             }
             store(body, cookies.AUTH_TOKEN).then(res => {
@@ -102,6 +117,8 @@ function Home() {
                 first_name: editDialog.first_name,
                 middle_name: editDialog.middle_name,
                 last_name: editDialog.last_name,
+                contact: editDialog.contact,
+                address: editDialog.address,
                 birth_date: editDialog.birth_date,
             }, editDialog.id, cookies.AUTH_TOKEN).then(res => {
                 if(res?.ok){
@@ -121,12 +138,13 @@ function Home() {
 
   return (
     <Box>
-        <Typography variant="h1">Hello, {user?.first_name ?? "Guest"}</Typography>
+        <Typography variant="h1">Hello {user?.profile.last_name}, {user?.profile.first_name ?? "Guest"}</Typography>
         {
             user ? (
                 <Box sx={{mt: 2}}>
                     <Box sx={{display: 'flex', justifyContent: 'end', py: 2}}>
                         <Button sx={{mr: 5}} onClick={() => setCreateDialog(true)}>Create User</Button>
+                        <Button sx={{ mr: 2 }} onClick={onLogout} variant="contained" color="error">Logout</Button>
                     </Box>
                     <DataGrid sx={{height: '500px'}} columns={columns} rows={rows} />
                     <Dialog open={!!createDialog}>
@@ -188,6 +206,22 @@ function Home() {
                                     }
                                 </Box>
                                 <Box sx={{mt: 1}}>
+                                    <TextField id="contact" fullWidth size="small" label="Contact" />
+                                    {
+                                    warnings?.contact ? (
+                                            <Typography sx={{fontSize: 12}} component="small" color="error">{warnings.contact}</Typography>
+                                        ) : null
+                                    }
+                                </Box>
+                                <Box sx={{mt: 1}}>
+                                    <TextField id="address" fullWidth size="small" label="Address" />
+                                    {
+                                    warnings?.address ? (
+                                            <Typography sx={{fontSize: 12}} component="small" color="error">{warnings.address}</Typography>
+                                        ) : null
+                                    }
+                                </Box>
+                                <Box sx={{mt: 1}}>
                                     <TextField required id="birth_date" fullWidth size="small" type="date" />
                                     {
                                     warnings?.birth_date ? (
@@ -239,6 +273,12 @@ function Home() {
                                 </Box>
                                 <Box sx={{mt: 1}}>
                                     <TextField onChange={e =>setEditDialog({...editDialog, last_name: e.target.value})} value={editDialog?.last_name ?? ""} size="small" fullWidth label="Last Name" />
+                                </Box>
+                                <Box sx={{mt: 1}}>
+                                    <TextField onChange={e =>setEditDialog({...editDialog, contact: e.target.value})} value={editDialog?.contact ?? ""} size="small" fullWidth label="Contact" />
+                                </Box>
+                                <Box sx={{mt: 1}}>
+                                    <TextField onChange={e =>setEditDialog({...editDialog, address: e.target.value})} value={editDialog?.address ?? ""} size="small" fullWidth label="Address" />
                                 </Box>
                                 <Box sx={{mt: 1}}>
                                     <TextField onChange={e =>setEditDialog({...editDialog, birth_date: e.target.value})} value={editDialog?.birth_date ?? ""} size="small" fullWidth label="Birth Date" />

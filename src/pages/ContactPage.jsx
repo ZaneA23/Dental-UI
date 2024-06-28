@@ -9,13 +9,14 @@ export default function ContactPage() {
     
 
   function sendEmail(e) {
-    e.preventDefault();    //This is important, i'm not sure why, but the email won't send without it
+    e.preventDefault();  
 
-    emailjs.sendForm('service_5ns43cy', 'template_s8e8t2b', e.target, 'FaW-LIpFZG50mbUqvL6Hc')
+    emailjs.sendForm('service_5ns43cy', 'template_s8e8t2b', e.target, '7CaRKRR3RWttlzhIP')
       .then((result) => {
+          console.log('Email successfully sent!', result.text);
           window.location.reload()  //This is if you still want the page to reload (since e.preventDefault() cancelled that behavior) 
       }, (error) => {
-          console.log(error.text);
+          console.error('Error sending email:', error.text);
       });
   }
 

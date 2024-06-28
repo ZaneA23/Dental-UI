@@ -22,7 +22,7 @@ export default function Login() {
             if(res?.ok){
                 setCookie("AUTH_TOKEN", res.data.token)
                 dispatch(login(res.data))
-                navigate("/Dashboard")
+                navigate("/Home")
                 toast.success(res?.message ?? "Logged in Successfully")
             } else{
                 toast.error(res?.message ?? "Something went Wrong")
@@ -39,10 +39,10 @@ export default function Login() {
             </Typography>
             <Box component={"form"} onSubmit={onSubmit} sx={{width: 300, mx: 'auto'}}>
                 <Box sx={{mt: 1}}>
-                    <TextField onChange={() => setName(e.target.value)} value={name} fullWidth size="small" label="Username" />
+                    <TextField onChange={(e) => setName(e.target.value)} value={name} fullWidth size="small" label="Username" />
                 </Box>
                 <Box sx={{mt: 1}}>
-                    <TextField onChange={() => setPassword(e.target.value)} value={password} fullWidth size="small" label="Password" type="password"/>
+                    <TextField onChange={(e) => setPassword(e.target.value)} value={password} fullWidth size="small" label="Password" type="password"/>
                 </Box>
                 <Box sx={{mt: 1, textAlign: 'center'}}>
                     <Button type='submit' variant="contained">Login</Button>

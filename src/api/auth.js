@@ -27,14 +27,13 @@ export const login = async (body) => {
 }
 
 export const checkToken = async (token) => {
-    const response = await fetch(`${url}/register`, {
+    const response = await fetch(`${url}/checkToken`, {
         method: 'GET',
         headers:{
             Accept: "application/json",
             "Content-Type": 'application/json',
             Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify(body)
     })  
 
     return await response.json()

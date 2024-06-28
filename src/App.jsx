@@ -28,7 +28,7 @@ function App() {
     },
     
     {
-      path: '/Dashboard',
+      path: '/Home',
       element: <Home/>
     },
     {
