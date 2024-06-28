@@ -51,7 +51,7 @@ export default function Register() {
 
   return (
     <Box sx={{minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems:  'center'}}>
-        <Box sx={{height: 550, width: 500, boxShadow: 'black 0px 0px 20px', borderRadius: 2}}>
+        <Box sx={{height: 650, width: 500, boxShadow: 'black 0px 0px 20px', borderRadius: 2}}>
             <Typography variant="h4" sx={{textAlign: 'center', mt: 2}}>
                 Register
 

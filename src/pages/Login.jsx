@@ -6,6 +6,7 @@ import { useCookies } from 'react-cookie'
 import { useDispatch } from 'react-redux'
 import { login } from '../redux/authSlice'
 import { toast } from 'react-toastify'
+import Nav from 'react-bootstrap/Nav'
 
 export default function Login() {
     const [name, setName] = useState("")
@@ -32,10 +33,14 @@ export default function Login() {
 
   return (
     <Box sx={{minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-        <Box sx={{height: 250, width: 500, boxShadow: 'black 0px 0px 20px', borderRadius: 2}}>
-            <Typography variant="h4" sx={{textAlign: 'center', mt: 2}}>
-                Login
-
+        <Box sx={{height: 300, width: 500, boxShadow: 'black 0px 0px 20px', borderRadius: 2}}>
+            <Typography variant="h4" sx={{textAlign: 'center', mt: 2}}>  
+            <Box sx={{display: 'flex', justifyContent: 'end', alignItems: 'end', marginRight: '25px'}}>
+                <Link eventKey="1" as={Link} to="/">
+                    x
+                </Link>
+            </Box>
+            Login
             </Typography>
             <Box component={"form"} onSubmit={onSubmit} sx={{width: 300, mx: 'auto'}}>
                 <Box sx={{mt: 1}}>
