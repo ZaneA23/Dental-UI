@@ -10,20 +10,22 @@ import img8 from './images/person_5.jpg'
 import img9 from './images/person_6.jpg'
 import img10 from './images/person_7.jpg'
 import img11 from './images/person_8.jpg'
+import '../css/fade.css'
+import '../js/animation.js'
 
 
 export default function DoctorsPage() {
   return (
     <>
     <NavbarComponents/>
-    <section class="home-slider owl-carousel">
-      <div class="slider-item bread-item" data-stellar-background-ratio="0.5">
-        <div class="overlay"></div>
-        <div class="container" data-scrollax-parent="true">
-          <div class="row slider-text align-items-end">
-            <div class="col-md-7 col-sm-12 ftco-animate mt-5 pt-5">
-              <p class="breadcrumbs" data-scrollax=" properties: { translateY: '70%', opacity: 1.6}"><span class="mr-2"><a href="index.html">Home</a></span> <span>Services</span></p>
-              <h1 class="mb-3" data-scrollax=" properties: { translateY: '70%', opacity: .9}">Well Experienced Doctors</h1>
+    <section className="home-slider owl-carousel">
+      <div className="slider-item bread-item" data-stellar-background-ratio="0.5">
+        <div className="overlay"></div>
+        <div className="container" data-scrollax-parent="true">
+          <div className="row slider-text align-items-end">
+            <div className="col-md-7 col-sm-12 ftco-animate mt-5 pt-5">
+              <p className="breadcrumbs" data-scrollax=" properties: { translateY: '70%', opacity: 1.6}"><span className="mr-2"><a href="index.html">Home</a></span> <span>Services</span></p>
+              <h1 className="reveal mb-3" data-scrollax=" properties: { translateY: '70%', opacity: .9}">Well Experienced Doctors</h1>
             </div>
           </div>
         </div>
@@ -34,14 +36,14 @@ export default function DoctorsPage() {
 
     <section className="ftco-section">
       <div className="container">
-      	<div className="row justify-content-center mt-5">
+      	<div className="reveal row justify-content-center mt-5">
           <div id="meet"  className="col-md-7 text-center heading-section ftco-animate">
             <h2>Meet Our Experience Dentist</h2>
             <p>Completing the team are competent dentists with different specializations, unfailing dental nurse assistants and aides, skilled laboratory technicians, and dependable staff, all ready to assist patients with any concern.</p>
           </div>
         </div>
         <div className="row">
-        	<div className="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
+        	<div className="reveal col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
         		<div className="staff">
       				<div id="doctors" className="img mb-4"><img src={img8} alt="Doctor 1" /></div>
       				<div className="info text-center">
@@ -59,7 +61,7 @@ export default function DoctorsPage() {
       				</div>
         		</div>
         	</div>
-        	<div className="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
+        	<div className="reveal col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
         		<div className="staff">
       				<div id="doctors" className="img mb-4" ><img src={img9} alt="Doctor 2" /></div>
       				<div className="info text-center">
@@ -77,7 +79,7 @@ export default function DoctorsPage() {
       				</div>
         		</div>
         	</div>
-        	<div className="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
+        	<div className="reveal col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
         		<div className="staff">
       				<div id="doctors" className="img mb-4"><img src={img10} alt="Doctor 3" /></div>
       				<div className="info text-center">
@@ -95,7 +97,7 @@ export default function DoctorsPage() {
       				</div>
         		</div>
         	</div>
-        	<div className="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
+        	<div className="reveal col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
         		<div className="staff">
       				<div id="doctors" className="img mb-4"><img src={img11} alt="Doctor 4" /></div>
       				<div className="info text-center">
@@ -113,7 +115,7 @@ export default function DoctorsPage() {
       				</div>
         		</div>
         	</div>
-          <div className="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
+          <div className="reveal col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
         		<div className="staff">
       				<div id="doctors" className="img mb-4"><img src={img4} alt="Doctor 4" /></div>
       				<div className="info text-center">
@@ -131,7 +133,7 @@ export default function DoctorsPage() {
       				</div>
         		</div>
         	</div>
-          <div className="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
+          <div className="reveal col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
         		<div className="staff">
       				<div id="doctors" className="img mb-4"><img src={img5} alt="Doctor 4" /></div>
       				<div className="info text-center">
@@ -149,7 +151,7 @@ export default function DoctorsPage() {
       				</div>
         		</div>
         	</div>
-          <div className="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
+          <div className="reveal col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
         		<div className="staff">
       				<div id="doctors" className="img mb-4"><img src={img6} alt="Doctor 4" /></div>
       				<div className="info text-center">
@@ -167,7 +169,7 @@ export default function DoctorsPage() {
       				</div>
         		</div>
         	</div>
-          <div className="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
+          <div className="reveal col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
         		<div className="staff">
       				<div id="doctors" className="img mb-4"><img src={img7} alt="Doctor 4" /></div>
       				<div className="info text-center">
@@ -193,7 +195,7 @@ export default function DoctorsPage() {
 
 	<section className="ftco-section ftco-counter img mt-5" id="section-counter" data-stellar-background-ratio="0.5">
     	<div className="container">
-    		<div className="row d-flex align-items-center">
+    		<div className="reveal row d-flex align-items-center">
     			<div id="achieve" className="col-md-3 py-5">
     				<div id="achieve-text" className=" heading-section ftco-animate pr-md-4">
 						<h2 className="mb-3">Achievements</h2>

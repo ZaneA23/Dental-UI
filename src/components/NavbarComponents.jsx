@@ -17,11 +17,11 @@ export default function NavbarComponents() {
           <NavbarToggle    aria-controls="basic-navbar-nav">MENU</NavbarToggle>
           <NavbarCollapse id="basic-navbar-nav">
           <Nav className="navbar-nav me-auto">
-            <Nav.Link eventKey="1" as={Link} to="/">Home</Nav.Link>
-            <Nav.Link eventKey="2" as={Link} to="/About">About</Nav.Link>
-            <Nav.Link eventKey="3" as={Link} to="/Services">Services</Nav.Link>
-            <Nav.Link eventKey="4" as={Link} to="/Doctors">Doctors</Nav.Link>
-            <Nav.Link eventKey="5" as={Link} to="/Contact">Contact</Nav.Link>
+            <Nav.Link style={{marginRight: '80px', marginLeft: '100px'}} eventKey="1" as={Link} to="/">Home</Nav.Link>
+            <Nav.Link style={{marginRight: '80px'}} eventKey="2" as={Link} to="/About">About</Nav.Link>
+            <Nav.Link style={{marginRight: '80px'}} eventKey="3" as={Link} to="/Services">Services</Nav.Link>
+            <Nav.Link style={{marginRight: '80px'}} eventKey="4" as={Link} to="/Doctors">Doctors</Nav.Link>
+            <Nav.Link style={{marginRight: '80px'}} eventKey="5" as={Link} to="/Contact">Contact</Nav.Link>
           </Nav>
           <Nav.Link href="/Login">
             <Button className="btn btn-primary" variant="primary">Login</Button>{' '}

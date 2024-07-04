@@ -10,19 +10,21 @@ import img7 from './images/calculus.png'
 import img8 from './images/infection.png'
 import img9 from './images/implant.png'
 import img10 from './images/drilling.png'
+import '../css/fade.css'
+import '../js/animation.js'
 
 export default function ServicesPage() {
   return (
     <>
     <NavbarComponents/>
-    <section class="home-slider owl-carousel">
-      <div class="slider-item bread-item" data-stellar-background-ratio="0.5">
-        <div class="overlay"></div>
-        <div class="container" data-scrollax-parent="true">
-          <div class="row slider-text align-items-end">
-            <div class="col-md-7 col-sm-12 ftco-animate mt-5 pt-5">
-              <p class="breadcrumbs" data-scrollax=" properties: { translateY: '70%', opacity: 1.6}"><span class="mr-2"><a href="index.html">Home</a></span> <span>Services</span></p>
-              <h1 class="mb-3" data-scrollax=" properties: { translateY: '70%', opacity: .9}">Our Service Keeps you Smile</h1>
+    <section className="home-slider owl-carousel">
+      <div className="slider-item bread-item" data-stellar-background-ratio="0.5">
+        <div className="overlay"></div>
+        <div className="container" data-scrollax-parent="true">
+          <div className="row slider-text align-items-end">
+            <div className="col-md-7 col-sm-12 ftco-animate mt-5 pt-5">
+              <p className="breadcrumbs" data-scrollax=" properties: { translateY: '70%', opacity: 1.6}"><span className="mr-2"><a href="index.html">Home</a></span> <span>Services</span></p>
+              <h1 className="reveal mb-3" data-scrollax=" properties: { translateY: '70%', opacity: .9}">Our Service Keeps you Smile</h1>
             </div>
           </div>
         </div>
@@ -34,13 +36,13 @@ export default function ServicesPage() {
     <section id="section2" className="ftco-section ftco-services">
       <div className="container">
       	<div className="row justify-content-center mb-5 pb-5">
-          <div className="col-md-7 text-center heading-section ftco-animate">
+          <div className="reveal col-md-7 text-center heading-section ftco-animate">
             <h2 id="smile">Our Service Keeps you Smile</h2>
             <p>We go beyond making sure your teeth and gums are healthy. Here, your smile gets the makeover that you need and desire through various dedicated treatments covering Cosmetic Dentistry, Dental Implants, Prosthodontics (Dentures), Oral Surgery, Periodontics, Root Canal Therapy, Orthodontics, TMJ Dysfunction Therapy, Restorative Treatment, Pediatric Dentistry, Oral Prophylaxis, Dental X-ray services, and diagnostics..</p>
           </div>
         </div>
         <div className="row">
-          <div className="col-md-3 d-flex align-self-stretch ftco-animate">
+          <div className="reveal col-md-3 d-flex align-self-stretch ftco-animate">
             <div className="media block-6 services d-block text-center">
               <div className="icon d-flex justify-content-center align-items-center">
             		<span id="serve"><img src={img3} alt="tooth" /></span>
@@ -51,7 +53,7 @@ export default function ServicesPage() {
               </div>
             </div>      
           </div>
-          <div className="col-md-3 d-flex align-self-stretch ftco-animate">
+          <div className="reveal col-md-3 d-flex align-self-stretch ftco-animate">
             <div className="media block-6 services d-block text-center">
               <div className="icon d-flex justify-content-center align-items-center">
             		<span id="serve"><img src={img4} alt="polish" /></span>
@@ -62,7 +64,7 @@ export default function ServicesPage() {
               </div>
             </div>    
           </div>
-          <div className="col-md-3 d-flex align-self-stretch ftco-animate">
+          <div className="reveal col-md-3 d-flex align-self-stretch ftco-animate">
             <div className="media block-6 services d-block text-center">
               <div className="icon d-flex justify-content-center align-items-center">
             		<span id="serve"><img src={img5} alt="braces" /></span>
@@ -73,7 +75,7 @@ export default function ServicesPage() {
               </div>
             </div>      
           </div>
-          <div className="col-md-3 d-flex align-self-stretch ftco-animate">
+          <div className="reveal col-md-3 d-flex align-self-stretch ftco-animate">
             <div className="media block-6 services d-block text-center">
               <div className="icon d-flex justify-content-center align-items-center">
             		<span id="serve"><img src={img6} alt="anesthetic" /></span>
@@ -84,7 +86,7 @@ export default function ServicesPage() {
               </div>
             </div>      
           </div>
-          <div className="col-md-3 d-flex align-self-stretch ftco-animate">
+          <div className="reveal col-md-3 d-flex align-self-stretch ftco-animate">
             <div className="media block-6 services d-block text-center">
               <div className="icon d-flex justify-content-center align-items-center">
             		<span id="serve"><img src={img7} alt="anesthetic" /></span>
@@ -95,7 +97,7 @@ export default function ServicesPage() {
               </div>
             </div>      
           </div>
-          <div className="col-md-3 d-flex align-self-stretch ftco-animate">
+          <div className="reveal col-md-3 d-flex align-self-stretch ftco-animate">
             <div className="media block-6 services d-block text-center">
               <div className="icon d-flex justify-content-center align-items-center">
             		<span id="serve"><img src={img8} alt="anesthetic" /></span>
@@ -106,7 +108,7 @@ export default function ServicesPage() {
               </div>
             </div>      
           </div>
-          <div className="col-md-3 d-flex align-self-stretch ftco-animate">
+          <div className="reveal col-md-3 d-flex align-self-stretch ftco-animate">
             <div className="media block-6 services d-block text-center">
               <div className="icon d-flex justify-content-center align-items-center">
             		<span id="serve"><img src={img9} alt="anesthetic" /></span>
@@ -117,7 +119,7 @@ export default function ServicesPage() {
               </div>
             </div>      
           </div>
-          <div className="col-md-3 d-flex align-self-stretch ftco-animate">
+          <div className="reveal col-md-3 d-flex align-self-stretch ftco-animate">
             <div className="media block-6 services d-block text-center">
               <div className="icon d-flex justify-content-center align-items-center">
             		<span id="serve"><img src={img10} alt="anesthetic" /></span>
@@ -136,7 +138,7 @@ export default function ServicesPage() {
 
 	<section className="ftco-section ftco-counter img" id="section-counter" data-stellar-background-ratio="0.5">
     	<div className="container">
-    		<div className="row d-flex align-items-center">
+    		<div className="reveal row d-flex align-items-center">
     			<div id="achieve" className="col-md-3 py-5">
     				<div id="achieve-text" className=" heading-section ftco-animate pr-md-4">
 						<h2 className="mb-3">Achievements</h2>

@@ -4,6 +4,8 @@ import FooterComponents from '../components/FooterComponents'
 import img1 from './images/image_6.jpg'
 import '../css/contact.css'
 import emailjs from 'emailjs-com'
+import '../css/fade.css'
+import '../js/animation.js'
 
 export default function ContactPage() {
     
@@ -41,7 +43,7 @@ export default function ContactPage() {
 
       <section className="ftco-section contact-section ftco-degree-bg mt-5">
       <div className="container">
-        <div className="row d-flex mb-5 contact-info">
+        <div className="reveal row d-flex mb-5 contact-info">
           <div className="col-md-12 mb-4">
             <h2 className="h4">Contact Information</h2>
           </div>
@@ -62,26 +64,26 @@ export default function ContactPage() {
         <div className="row block-9">
           <div className="col-md-6 pr-md-5">
             <form className="hidden" onSubmit={sendEmail}>
-              <div className="form-group">
+              <div className="reveal form-group">
                 <input type="text" name="from_name" className="form-control" placeholder="Your Name"/>
               </div>
-              <div className="form-group">
+              <div className="reveal form-group">
                 <input type="text" name="from_email" className="form-control mt-3" placeholder="Your Email"/>
               </div>
-              <div className="form-group">
+              <div className="reveal form-group">
                 <input type="text" name="subject" className="form-control mt-3" placeholder="Subject"/>
               </div>
-              <div className="form-group ">
+              <div className="reveal form-group ">
                 <textarea name="html_message" id="" cols="30" rows="7" className="form-control mt-3" placeholder="Message"></textarea>
               </div>
-              <div className="form-group">
+              <div className="reveal form-group">
                 <input type="submit" value="Send Message" className="btn btn-primary py-3 px-5 mt-3"/>
               </div>
             </form>
           
           </div>
 
-          <div className="col-md-6" id=""><img
+          <div className="reveal col-md-6" id=""><img
             src={img1}
             className="img-fluid rounded-top"
             alt=""
