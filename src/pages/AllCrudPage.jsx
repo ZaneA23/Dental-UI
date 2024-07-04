@@ -1,35 +1,33 @@
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography, FormControl, InputLabel, Select, MenuList  } from '@mui/material'
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography, FormControl } from '@mui/material'
 import React, { useEffect, useState } from 'react'
+import { Link} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import checkAuth from '../hoc/checkAuth'
 import { DataGrid } from '@mui/x-data-grid'
 import { useCookies } from 'react-cookie'
-import { nurse_destroy, nurse_index, nurse_store, nurse_update } from '../api/nurse'
 import { destroy, index, store, update } from '../api/user'
-import { appointment_destroy, appointment_index, appointment_store, appointment_update } from '../api/appointment'
-
-import { procedure_destroy, procedure_index, procedure_store, procedure_update } from '../api/procedure'
 import { toast } from 'react-toastify'
 import $ from 'jquery'
 import { logout } from '../redux/authSlice'
-import { Navigate, useNavigate, Link } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
+import { Dropdown } from 'bootstrap'
+import { DropdownButton } from 'react-bootstrap'
 
 
-function Home() {
+function AllCrudPage() {
     const [rows, setRows] = useState([])
     const [warnings, setWarnings] = useState({})
     const [loading, setLoading] = useState(false)
-
-
     const [createDialog, setCreateDialog] = useState(false)
     const [deleteDialog, setDeleteDialog] = useState(null)
     const [editDialog, setEditDialog] = useState(null)
-
+    const [appointmentDialog, setAppointmentDialog] = useState(null)
+    const [deleteAppointmentDialog, setAppointmentDeleteDialog] = useState(null)
+    const [editAppointmentDialog, setAppointmentEditDialog] = useState(null)
     const user = useSelector(state => state.auth.user)
     const [cookies, setCookie, removeCookie] = useCookies()
     const dispatch = useDispatch()
-    const navigate = useNavigate() 
-
+    const navigate = useNavigate()
     const columns = [
         {field: 'id', headerName: 'ID'},
         {field: 'name', headerName: 'Username'},
@@ -47,14 +45,30 @@ function Home() {
             </Box>
         ), minWidth: 200, hideable: false} 
     ]
-
-
+    const appointmentColumn = [
+        {field: 'id', headerName: 'ID'},
+        {field: 'dentist_id', headerName: 'Dentist_id'},
+        {field: 'nurse_id', headerName: 'Nurse_id'},
+        {field: 'profile_id', headerName: 'Profile_id'},
+        {field: 'procedure_id', headerName: 'Procedure_id'},
+        {field: 'treatment_date', headerName: 'Treatment_date'},
+        {field: 'treatment_time', headerName: 'Treatment Time'},
+        {field: 'actions', headerName: '', sortable: false, filterable: false, renderCell: params => (
+            <Box sx={{display: 'flex', gap: 1, justifyContent: 'center', alignItems: 'center', height: '100%'}}>
+                <Button onClick={() => setEditDialog({...params.row})} variant="contained" color="warning">Edit</Button>
+                <Button onClick={() => setDeleteDialog(params.row.id)} variant="contained" color="error">Delete</Button>
+            </Box>
+        ), minWidth: 200, hideable: false} 
+    ]
+    
+    
     const onLogout = () => {
         removeCookie("AUTH_TOKEN")
         dispatch(logout())
         navigate("/login")
         toast.success("Logged Out!")
     } 
+    
     
     const refreshData = () => {
         index(cookies.AUTH_TOKEN).then(res => {
@@ -118,7 +132,7 @@ function Home() {
         }
     }
 
-    const onEdit = e => {
+    const onEdit = () => {
         e.preventDefault()
         if(!loading){
             setLoading(true)
@@ -146,31 +160,21 @@ function Home() {
 
     
 
-
-
-
   return (
-
     <Box>
         <Typography variant="h1">Hello {user?.profile.last_name}, {user?.profile.first_name ?? "Guest"}</Typography>
         {
             user ? (
                 <Box sx={{mt: 2}}>
                     <Box sx={{display: 'flex', justifyContent: 'end', py: 2}}>
-                    <Button sx={{ mr: 5 }} ><Link to="/NursePage">Nurses</Link></Button>
-                    <Button sx={{ mr: 5 }} ><Link to="/DentistPage">Dentist</Link></Button>
-                        <Button sx={{mr: 5}}><Link to="/PromoPage"> Promo</Link></Button>
-                        <Button sx={{mr: 5}}> <Link to="/ProcedurePage"> Procedure</Link></Button>
-                        <Button sx={{mr: 5}}> <Link to="/AppointmentCrud"> Appointment</Link></Button>
                         <Button sx={{mr: 5}} onClick={() => setCreateDialog(true)}>Create User</Button>
+                        <Button sx={{mr: 5}} onClick={() => setAppointmentDialog(true)}>Appointment</Button>
                         <Button sx={{ mr: 2 }} onClick={onLogout} variant="contained" color="error">Logout</Button>
                     </Box>
 
-
-{/* ---------------------User Table------------------------------------------------------------ */}
-
-
                     <DataGrid sx={{height: '500px'}} columns={columns} rows={rows} />
+                    <DataGrid sx={{height: '500px'}} columns={appointmentColumn} rows={rows} />
+
                     <Dialog open={!!createDialog}>
                         <DialogTitle>
                             Create a User
@@ -230,7 +234,7 @@ function Home() {
                                     }
                                 </Box>
                                 <Box sx={{mt: 1}}>
-                                    <TextField id="contact" fullWidth size="small" label="Contact" type="number" />
+                                    <TextField id="contact" fullWidth size="small" label="Contact" />
                                     {
                                     warnings?.contact ? (
                                             <Typography sx={{fontSize: 12}} component="small" color="error">{warnings.contact}</Typography>
@@ -261,24 +265,10 @@ function Home() {
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={() => setCreateDialog(false)} color='info'>Close</Button>
-                            <Button onClick={() => {$("#submit_btn").trigger("click")}}>Create</Button>
+                            <Button onClick={() => {$("submit_btn").trigger("click")}}>Create</Button>
                         
                         </DialogActions>
 
-                    </Dialog>
-                    <Dialog open={!!deleteDialog}>
-                        <DialogTitle>
-                            Are you Sure?
-                        </DialogTitle>
-                        <DialogContent>
-                            <Typography>
-                                Do you want to delete this user with ID: {deleteDialog}?
-                            </Typography>
-                        </DialogContent>
-                        <DialogActions sx={{display: !!deleteDialog ? "flex" : 'none'}}>
-                            <Button onClick={() => setDeleteDialog(null)}>Cancel</Button>
-                            <Button disabled={loading} onClick={onDelete}>Confirm</Button>
-                        </DialogActions>
                     </Dialog>
                     <Dialog open={!!editDialog}>
                         <DialogTitle>
@@ -299,7 +289,7 @@ function Home() {
                                     <TextField onChange={e =>setEditDialog({...editDialog, last_name: e.target.value})} value={editDialog?.last_name ?? ""} size="small" fullWidth label="Last Name" />
                                 </Box>
                                 <Box sx={{mt: 1}}>
-                                    <TextField onChange={e =>setEditDialog({...editDialog, contact: e.target.value})} value={editDialog?.contact ?? ""} size="small" fullWidth label="Contact" type="number"/>
+                                    <TextField onChange={e =>setEditDialog({...editDialog, contact: e.target.value})} value={editDialog?.contact ?? ""} size="small" fullWidth label="Contact" />
                                 </Box>
                                 <Box sx={{mt: 1}}>
                                     <TextField onChange={e =>setEditDialog({...editDialog, address: e.target.value})} value={editDialog?.address ?? ""} size="small" fullWidth label="Address" />
@@ -318,14 +308,11 @@ function Home() {
 
                     </Dialog>
 
-                    
-
                 </Box>
-            
             ) : null
         }
+
     </Box>
   )
 }
-
 export default checkAuth(Home)

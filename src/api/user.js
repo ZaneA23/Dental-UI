@@ -45,8 +45,8 @@ export const update = async (body, id, token) => {
     const response = await fetch(`${url}/users/${id}?_method=PATCH`, {
         method: 'POST',
         headers:{
-            Accept: "application/json",
-            "Content-Type": "application/json",
+            Accept: 'application/json',
+            "Content-Type": 'application/json',
             Authorization: `Bearer ${token}`
         },
         body: JSON.stringify(body)
@@ -54,3 +54,4 @@ export const update = async (body, id, token) => {
 
     return await response.json()
 }
+

@@ -13,8 +13,12 @@ import DoctorsPage from './pages/DoctorsPage'
 import ContactPage from './pages/ContactPage'
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap/dist/js/bootstrap.js"
-
-
+import Appointment from './pages/AppointmentPage'
+import AppointmentCrudPage from './pages/AppointmentCrudPage'
+import PromoPage from './pages/PromoPage';
+import NursePage from './pages/NursePage'
+import DentistPage from './pages/DentistPage'
+import ProcedurePage from './pages/ProcedurePage'
 
 function App() {
   const router = createBrowserRouter([
@@ -31,6 +35,11 @@ function App() {
       path: '/Home',
       element: <Home/>
     },
+    {
+      path: '/HomePage',
+      element: <HomePage/>
+    },
+
     {
       path: '/Register',
       element: <Register/>
@@ -51,6 +60,31 @@ function App() {
       path: '/Contact',
       element: <ContactPage/>
     },
+    {
+      path: '/AppointmentPage',
+      element: <Appointment/>
+    },
+    {
+      path: '/AppointmentCrudPage',
+      element: <AppointmentCrudPage/>
+    },
+    {
+      path: '/PromoPage',
+      element: <PromoPage/>
+    },
+    {
+      path: '/NursePage',
+      element: <NursePage/>
+    },
+    {
+      path: '/DentistPage',
+      element: <DentistPage/>
+    },
+    {
+      path: '/ProcedurePage',
+      element: <ProcedurePage/>
+    },
+
 
   ])
 

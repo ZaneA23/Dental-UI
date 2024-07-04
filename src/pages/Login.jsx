@@ -36,7 +36,7 @@ export default function Login() {
         <Box sx={{height: 300, width: 500, boxShadow: 'black 0px 0px 20px', borderRadius: 2}}>
             <Typography variant="h4" sx={{textAlign: 'center', mt: 2}}>  
             <Box sx={{display: 'flex', justifyContent: 'end', alignItems: 'end', marginRight: '25px'}}>
-                <Link eventKey="1" as={Link} to="/">
+                <Link eventkey="1" as={Link} to="/">
                     x
                 </Link>
             </Box>

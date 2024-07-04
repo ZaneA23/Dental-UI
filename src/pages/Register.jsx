@@ -109,7 +109,7 @@ export default function Register() {
                     }
                 </Box>
                 <Box sx={{mt: 1}}>
-                    <TextField id="contact" fullWidth size="small" label="Contact" />
+                    <TextField id="contact" fullWidth size="small" label="Contact" type="n" />
                     {
                        warnings?.contact ? (
                             <Typography sx={{fontSize: 12}} component="small" color="error">{warnings.contact}</Typography>

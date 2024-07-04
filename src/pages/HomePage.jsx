@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography } from '@mui/material'
+import { Link, useNavigate } from 'react-router-dom'
 import NavbarComponents from '../components/NavbarComponents'
 import FooterComponents from '../components/FooterComponents'
 import Carousel from 'react-bootstrap/Carousel'
@@ -32,7 +34,7 @@ export default function HomePage() {
             <div id="carousel-caption">
               <h1 className="mb-4" >Modern Dentistry in a Calm and Relaxed Environment</h1>
               <p className="mb-5">Our aim is to look after your whole family’s oral health with experienced dentists, superior quality in our materials at a respectable price.</p>
-              <p><a href="/Contact" className="btn btn-primary px-4 py-3">Make an Appointment</a></p>
+              <Link to="/AppointmentPage" ><button color="blue" margin="10px" padding="5px">Make an Appointment</button></Link>
             </div>
           </Carousel.Caption>
         </Carousel.Item>
@@ -42,7 +44,7 @@ export default function HomePage() {
             <div id="carousel-caption">
               <h1 className="mb-4">Modern Achieve Your Desired Perfect Smile</h1>
               <p className="mb-5">We provide you with a friendly environment and combine skill and gentle caring touch with emphasis to quality performance and service.</p>
-              <p><a href="/Contact" className="btn btn-primary px-4 py-3">Make an Appointment</a></p>
+			  <Button sx={{ mr: 5 }} variant="contained"><Link to="/AppointmentPage" >Make an Appointment</Link></Button>
             </div>
               
           </Carousel.Caption>
