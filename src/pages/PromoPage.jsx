@@ -13,6 +13,8 @@ import { Navigate, useNavigate } from 'react-router-dom'
 import { Dropdown } from 'bootstrap'
 import { DropdownButton } from 'react-bootstrap'
 import { Description } from '@mui/icons-material'
+import bg1 from './images/bg_1.jpg';
+
 
 
 function PromoPage() {
@@ -40,7 +42,7 @@ function PromoPage() {
         {field: 'promo_end', headerName: 'Promo End'},
         {field: 'actions', headerName: '', sortable: false, filterable: false, renderCell: params => (
             <Box sx={{display: 'flex', gap: 1, justifyContent: 'center', alignItems: 'center', height: '100%'}}>
-                    <Button onClick={() => setPromoEditDialog({...params.row})} variant="contained" color="warning">Edit</Button>
+                    <Button onClick={() => setPromoEditDialog({...params.row})} variant="contained" color="primary">Edit</Button>
                     <Button onClick={() => setPromoDeleteDialog(params.row.id)} variant="contained" color="error">Delete</Button>
             </Box>
             ), minWidth: 200, hideable: false}]
@@ -139,11 +141,11 @@ function PromoPage() {
     
 
   return (
-    <Box>
+    <Box sx={{ backgroundImage: `url(${bg1})`}}>
         <Typography variant="h1">Hello {user?.profile.last_name}, {user?.profile.first_name ?? "Guest"}</Typography>
         {
             user ? (
-                <Box sx={{mt: 2}}>
+                <Box sx={{mt: 2, backgroundColor: 'azure', opacity: '0.9'}}>
                     <Box sx={{display: 'flex', justifyContent: 'end', py: 2}}>
                         <Button sx={{mr: 5}} onClick={() => setPromoDialog(true)}>Create Promo</Button>
                         <Button sx={{ mr: 5 }} ><Link to="/Home">Users</Link></Button>
