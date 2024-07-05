@@ -11,6 +11,8 @@ import img13 from './images/person_2.jpg'
 import img14 from './images/person_3.jpg'
 import img15 from './images/person_4.jpg'
 import Carousel from 'react-bootstrap/Carousel'
+import '../css/fade.css'
+import '../js/animation.js'
 
 export default function AboutPage() {
   return (
@@ -23,14 +25,14 @@ export default function AboutPage() {
           <div className="row slider-text align-items-end">
             <div className="col-md-7 col-sm-12 ftco-animate mt-5 pt-5">
               <p className="breadcrumbs" data-scrollax=" properties: { translateY: '70%', opacity: 1.6}"><span className="mr-2"><a href="index.html">Home</a></span> <span>About</span></p>
-              <h1 className="mb-3" data-scrollax=" properties: { translateY: '70%', opacity: .9}">About Us</h1>
+              <h1 className="reveal mb-3" data-scrollax=" properties: { translateY: '70%', opacity: .9}">About Us</h1>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-		<section className="ftco-section mt-5">
+	<section className="reveal ftco-section mt-5">
     	<div className="container">
     		<div className="row d-md-flex">
 	    		<div id="aboutus" className="col-md-6 ftco-animate img about-image order-md-last">
@@ -44,21 +46,21 @@ export default function AboutPage() {
               className="mb-3"
               >
               <Tab eventKey="wedo" title="What we do">
-                <div>
+                <div className="reveal">
                   <h2 className="mb-4">We Offer High Quality Services</h2>
                   <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt voluptate, quibusdam sunt iste dolores consequatur</p>
                 </div>
               </Tab>
               <Tab eventKey="mission" title="Our mission">
-                <div>
+                <div className="reveal">
                   <h2 className="mb-4">To Accomodate All Patients</h2>
                   <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt voluptate, quibusdam sunt iste dolores consequatur</p>
                 </div>
               </Tab>
               <Tab eventKey="goal" title="Our goal">
-                <div>
+                <div className="reveal">
                   <h2 className="mb-4">Help Our Customers Needs</h2>
                   <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt voluptate, quibusdam sunt iste dolores consequatur</p>
@@ -71,8 +73,11 @@ export default function AboutPage() {
           </div>
         </div>
       </div>
-      <div className="container-wrap mt-5">
-      	<div className="row d-flex no-gutters">
+    </section>
+
+	<section>
+	<div className="container-wrap mt-5">
+      	<div className="reveal row d-flex no-gutters">
       		<div className="col-md-6 img" id="about2">
       		</div>
       		<div className="col-md-6 d-flex">
@@ -112,19 +117,19 @@ export default function AboutPage() {
       		</div>
       	</div>
       </div>
-    </section>
+	</section>
     
     {/* Section 5 TESTIMONIALS*/}
 
 	<section className="ftco-section testimony-section bg-light">
       <div className="container">
-	  <div className="row justify-content-center mb-5 pb-3">
+	  <div className="reveal row justify-content-center mb-5 pb-3">
           <div className="col-md-7 text-center heading-section ftco-animate">
             <h2 className="mt-5">Testimony</h2>
             <span className="subheading">Our Happy Customer Says</span>
           </div>
         </div>
-	  <Carousel fade>
+	  <Carousel fade className="reveal">
         <Carousel.Item interval={5000}>
 		<div className="testimony-wrap p-4 pb-5">
           <img id="testy" className='d-block ' src={img12} alt="Image 1" />
@@ -186,7 +191,7 @@ export default function AboutPage() {
 
 	<section className="ftco-section ftco-counter img mt-5" id="section-counter" data-stellar-background-ratio="0.5">
     	<div className="container">
-    		<div className="row d-flex align-items-center">
+    		<div className="reveal row d-flex align-items-center">
     			<div id="achieve" className="col-md-3 py-5">
     				<div id="achieve-text" className=" heading-section ftco-animate pr-md-4">
 						<h2 className="mb-3">Achievements</h2>

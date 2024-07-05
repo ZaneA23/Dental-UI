@@ -156,18 +156,17 @@ function Home() {
         {
             user ? (
                 <Box sx={{mt: 2}}>
-                    <Box sx={{display: 'flex', justifyContent: 'end', py: 2}}>
-                    <Button sx={{ mr: 5 }} ><Link to="/NursePage">Nurses</Link></Button>
-                    <Button sx={{ mr: 5 }} ><Link to="/DentistPage">Dentist</Link></Button>
+                        <Box sx={{display: 'flex', justifyContent: 'end', py: 2}}>
+                        <Button sx={{ mr: 5 }} ><Link to="/NursePage">Nurses</Link></Button>
+                        <Button sx={{ mr: 5 }} ><Link to="/DentistPage">Dentist</Link></Button>
                         <Button sx={{mr: 5}}><Link to="/PromoPage"> Promo</Link></Button>
                         <Button sx={{mr: 5}}> <Link to="/ProcedurePage"> Procedure</Link></Button>
-                        <Button sx={{mr: 5}}> <Link to="/AppointmentCrud"> Appointment</Link></Button>
+                        <Button sx={{mr: 5}}> <Link to="/AppointmentCrudPage"> Appointment</Link></Button>
                         <Button sx={{mr: 5}} onClick={() => setCreateDialog(true)}>Create User</Button>
                         <Button sx={{ mr: 2 }} onClick={onLogout} variant="contained" color="error">Logout</Button>
                     </Box>
 
 
-{/* ---------------------User Table------------------------------------------------------------ */}
 
 
                     <DataGrid sx={{height: '500px'}} columns={columns} rows={rows} />

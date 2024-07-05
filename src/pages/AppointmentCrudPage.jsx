@@ -43,7 +43,7 @@ function AppointmentCrudPage() {
     const refreshData = () => {
         appointment_index(cookies.AUTH_TOKEN).then(res => {
             if (res?.ok) {
-                setAppointmentRows(res.data || []); // Ensure data is always an array
+                setAppointmentRows(res.data || []);
             } else {
                 toast.error(res?.message ?? "Something went Wrong");
             }

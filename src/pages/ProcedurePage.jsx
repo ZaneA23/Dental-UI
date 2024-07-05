@@ -19,16 +19,8 @@ function ProcedurePage() {
     const [editProDialog, setProEditDialog] = useState(null)
     const [procedureDialog, setProcedureDialog] = useState(false)
     const [procedure_rows, setProRows] = useState([])
-
-    const [rows, setRows] = useState([])
     const [warnings, setWarnings] = useState({})
     const [loading, setLoading] = useState(false)
-    const [createDialog, setCreateDialog] = useState(false)
-    const [deleteDialog, setDeleteDialog] = useState(null)
-    const [editDialog, setEditDialog] = useState(null)
-    const [appointmentDialog, setAppointmentDialog] = useState(null)
-    const [deleteAppointmentDialog, setAppointmentDeleteDialog] = useState(null)
-    const [editAppointmentDialog, setAppointmentEditDialog] = useState(null)
     const user = useSelector(state => state.auth.user)
     const [cookies, setCookie, removeCookie] = useCookies()
     const dispatch = useDispatch()
@@ -58,7 +50,7 @@ function ProcedurePage() {
                     d = {...d, ...d.profile}
                     return d
                 })
-                setRows(res.data)
+                setProRows(res.data)
             } else{
                 toast.error(res?.message ?? "Something went Wrong")
             }

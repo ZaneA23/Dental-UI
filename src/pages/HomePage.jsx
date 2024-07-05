@@ -1,6 +1,4 @@
-import React, { useState } from 'react'
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography } from '@mui/material'
-import { Link, useNavigate } from 'react-router-dom'
+import React from 'react'
 import NavbarComponents from '../components/NavbarComponents'
 import FooterComponents from '../components/FooterComponents'
 import Carousel from 'react-bootstrap/Carousel'
@@ -19,7 +17,10 @@ import img12 from './images/person_1.jpg'
 import img13 from './images/person_2.jpg'
 import img14 from './images/person_3.jpg'
 import img15 from './images/person_4.jpg'
+import '../css/fade.css'
+import '../js/animation.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Box } from '@mui/material'
 
 
 export default function HomePage() {
@@ -27,14 +28,15 @@ export default function HomePage() {
   return (
     <>
       <NavbarComponents />
-      <Carousel fade>
+	  <Box>
+	  <Carousel >
         <Carousel.Item interval={5000}>
           <img id="img1" className='d-block w-100' src={img1} alt="Image 1" />
           <Carousel.Caption>
             <div id="carousel-caption">
               <h1 className="mb-4" >Modern Dentistry in a Calm and Relaxed Environment</h1>
               <p className="mb-5">Our aim is to look after your whole family’s oral health with experienced dentists, superior quality in our materials at a respectable price.</p>
-              <Link to="/AppointmentPage" ><button color="blue" margin="10px" padding="5px">Make an Appointment</button></Link>
+              <p><a href="/AppointmentPage" className="btn btn-primary px-4 py-3">Make an Appointment</a></p>
             </div>
           </Carousel.Caption>
         </Carousel.Item>
@@ -44,24 +46,26 @@ export default function HomePage() {
             <div id="carousel-caption">
               <h1 className="mb-4">Modern Achieve Your Desired Perfect Smile</h1>
               <p className="mb-5">We provide you with a friendly environment and combine skill and gentle caring touch with emphasis to quality performance and service.</p>
-			  <Button sx={{ mr: 5 }} variant="contained"><Link to="/AppointmentPage" >Make an Appointment</Link></Button>
+              <p><a href="/AppointmentPage" className="btn btn-primary px-4 py-3">Make an Appointment</a></p>
             </div>
               
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
+	  </Box>
+      
 
       {/* SECTION 2 */}
 
       <section id="section2" className="ftco-section ftco-services">
       <div className="container">
-      	<div className="row justify-content-center mb-5 pb-5">
+      	<div className="reveal row justify-content-center mb-5 pb-5">
           <div className="col-md-7 text-center heading-section ftco-animate">
             <h2 id="smile">Our Service Keeps you Smile</h2>
             <p>We go beyond making sure your teeth and gums are healthy. Here, your smile gets the makeover that you need and desire through various dedicated treatments covering Cosmetic Dentistry, Dental Implants, Prosthodontics (Dentures), Oral Surgery, Periodontics, Root Canal Therapy, Orthodontics, TMJ Dysfunction Therapy, Restorative Treatment, Pediatric Dentistry, Oral Prophylaxis, Dental X-ray services, and diagnostics..</p>
           </div>
         </div>
-        <div className="row">
+        <div className="reveal row">
           <div className="col-md-3 d-flex align-self-stretch ftco-animate">
             <div className="media block-6 services d-block text-center">
               <div className="icon d-flex justify-content-center align-items-center">
@@ -109,7 +113,7 @@ export default function HomePage() {
         </div>
       </div>
       <div className="container-wrap mt-5">
-      	<div className="row d-flex no-gutters">
+      	<div className="reveal row d-flex no-gutters">
       		<div className="col-md-6 img" id="about2">
       		</div>
       		<div className="col-md-6 d-flex">
@@ -155,13 +159,13 @@ export default function HomePage() {
 
     <section className="ftco-section">
       <div className="container">
-      	<div className="row justify-content-center mb-5 pb-5">
+      	<div className="reveal row justify-content-center mb-5 pb-5">
           <div id="meet"  className="col-md-7 text-center heading-section ftco-animate">
             <h2>Meet Our Experience Dentist</h2>
             <p>Completing the team are competent dentists with different specializations, unfailing dental nurse assistants and aides, skilled laboratory technicians, and dependable staff, all ready to assist patients with any concern.</p>
           </div>
         </div>
-        <div className="row">
+        <div className="reveal row">
         	<div className="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
         		<div className="staff">
       				<div id="doctors" className="img mb-4"><img src={img8} alt="Doctor 1" /></div>
@@ -235,7 +239,7 @@ export default function HomePage() {
         		</div>
         	</div>
         </div>
-        <div className="row  mt-5 justify-conten-center">
+        <div className="reveal row  mt-5 justify-conten-center">
         	<div className="col-md-8 ftco-animate">
         		<p>Dentistry is an evergreen industry that is continuously growing along with the rise of technological advancements and further research. We ensure that we are in line with the latest methods and carry on with the improving our services for the satisfaction of our current and future clients.</p>
         	</div>
@@ -247,7 +251,7 @@ export default function HomePage() {
 
 	<section className="ftco-section ftco-counter img" id="section-counter" data-stellar-background-ratio="0.5">
     	<div className="container">
-    		<div className="row d-flex align-items-center">
+    		<div className="reveal row d-flex align-items-center">
     			<div id="achieve" className="col-md-3 py-5">
     				<div id="achieve-text" className=" heading-section ftco-animate pr-md-4">
 						<h2 className="mb-3">Achievements</h2>
@@ -298,13 +302,13 @@ export default function HomePage() {
 
 	<section className="ftco-section testimony-section bg-light">
       <div className="container">
-	  <div className="row justify-content-center mb-5 pb-3">
+	  <div className="reveal row justify-content-center mb-5 pb-3">
           <div className="col-md-7 text-center heading-section ftco-animate">
             <h2 className="mb-2 mt-5">Testimony</h2>
             <span className="subheading">Our Happy Customer Says</span>
           </div>
         </div>
-	  <Carousel fade>
+	  <Carousel fade className="reveal">
         <Carousel.Item interval={5000}>
 		<div className="testimony-wrap p-4 pb-5">
           <img id="testy" className='d-block ' src={img12} alt="Image 1" />

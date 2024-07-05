@@ -12,6 +12,7 @@ import { logout } from '../redux/authSlice'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { Dropdown } from 'bootstrap'
 import { DropdownButton } from 'react-bootstrap'
+import { Description } from '@mui/icons-material'
 
 
 function PromoPage() {
@@ -85,7 +86,7 @@ function PromoPage() {
                 }
             }
         
-            const onPromoEdit = () => {
+            const onPromoEdit = e => {
                 e.preventDefault()
                 if(!loading){
                     setLoading(true)
@@ -125,7 +126,7 @@ function PromoPage() {
                     d = {...d, ...d.profile}
                     return d
                 })
-                setRows(res.data)
+                setPromoRows(res.data)
             } else{
                 toast.error(res?.message ?? "Something went Wrong")
             }
@@ -237,10 +238,10 @@ function PromoPage() {
                         </DialogTitle>
                         <DialogContent>
                             
-                            <Box component="form" onSubmit={onPromoCreate} sx={{width: 300, mx: 'auto'}}>
+                            <Box component="form" onSubmit={onPromoEdit} sx={{width: 300, mx: 'auto'}}>
 
                                 <Box sx={{mt: 1}}>
-                                    <TextField required id="discount" fullWidth size="small" label="Discount"/>
+                                    <TextField onChange={e =>setPromoEditDialog({...editPromoDialog, discount: e.target.value})} value={editPromoDialog?.discount ?? ""}  fullWidth size="small" label="Discount"/>
                                     {
                                     warnings?.discount ? (
                                             <Typography sx={{fontSize: 12}} component="small" color="error">{warnings.discount}</Typography>
@@ -248,7 +249,7 @@ function PromoPage() {
                                     }
                                 </Box>
                                 <Box sx={{mt: 1}}>
-                                    <TextField required id="description" fullWidth size="small" label="Discount" />
+                                    <TextField onChange={e =>setPromoEditDialog({...editPromoDialog, description: e.target.value})} value={editPromoDialog?.description ?? ""}  fullWidth size="small" label="Description" />
                                     {
                                     warnings?.description ? (
                                             <Typography sx={{fontSize: 12}} component="small" color="error">{warnings.description}</Typography>
@@ -257,7 +258,7 @@ function PromoPage() {
                                 </Box>
                                 
                                 <Box sx={{mt: 1}}>
-                                    <TextField required id="price" fullWidth size="small" label="Price" 
+                                    <TextField onChange={e =>setPromoEditDialog({...editPromoDialog, price: e.target.value})} value={editPromoDialog?.price ?? ""}fullWidth size="small" label="Price" 
                                     type="number" />
                                     {
                                     warnings?.price ? (
@@ -267,7 +268,7 @@ function PromoPage() {
                                 </Box>
                                
                                 <Box sx={{mt: 1}}>
-                                    <TextField id="promo_name" fullWidth size="small" label="Promo Name" />
+                                    <TextField onChange={e =>setPromoEditDialog({...editPromoDialog, promo_name: e.target.value})} value={editPromoDialog?.promo_name ?? ""}  fullWidth size="small" label="Promo Name" />
                                     {
                                     warnings?.promo_name ? (
                                             <Typography sx={{fontSize: 12}} component="small" color="error">{warnings.promo_name}</Typography>
@@ -275,10 +276,10 @@ function PromoPage() {
                                     }
                                 </Box>
                                 <Box sx={{mt: 1}}>
-                                    <TextField id="promo_end" fullWidth size="small" label="promo_end" />
+                                    <TextField onChange={e =>setPromoEditDialog({...editPromoDialog, promo_end: e.target.value})} value={editPromoDialog?.promo_end ?? ""} fullWidth size="small" label="promo_end" type="date" />
                                     {
                                     warnings?.promo_end ? (
-                                            <Typography sx={{fontSize: 12}} component="small" color="error">{warnings.promo_end}</Typography>
+                                            <Typography sx={{fontSize: 12}} component="small" color="error"> {warnings.promo_end} </Typography>
                                         ) : null
                                     }
                                 </Box>
