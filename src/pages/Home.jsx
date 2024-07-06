@@ -4,19 +4,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import checkAuth from '../hoc/checkAuth'
 import { DataGrid } from '@mui/x-data-grid'
 import { useCookies } from 'react-cookie'
-import { nurse_destroy, nurse_index, nurse_store, nurse_update } from '../api/nurse'
 import { destroy, index, store, update } from '../api/user'
-import { appointment_destroy, appointment_index, appointment_store, appointment_update } from '../api/appointment'
-import { procedure_destroy, procedure_index, procedure_store, procedure_update } from '../api/procedure'
 import { toast } from 'react-toastify'
 import $ from 'jquery'
 import { logout } from '../redux/authSlice'
 import { Navigate, useNavigate, Link } from 'react-router-dom'
 import bg1 from './images/bg_1.jpg'
-<<<<<<< HEAD
-=======
 
->>>>>>> 8104337c06823d2533d4ba8994bcfba5d13b21d9
+
+
 
 function Home() {
     const [rows, setRows] = useState([])
@@ -34,14 +30,10 @@ function Home() {
     const navigate = useNavigate() 
 
     const columns = [
-<<<<<<< HEAD
-        {field: 'id', headerName: 'ID' , flex: 1},
-        {field: 'name', headerName: 'Username', flex: 1},
-=======
         
         {field: 'id', headerName: 'ID'},
         {field: 'name', headerName: 'Username'},
->>>>>>> 8104337c06823d2533d4ba8994bcfba5d13b21d9
+
         {field: 'email', headerName: 'Email'},
         {field: 'first_name', headerName: 'First Name', flex: 1},
         {field: 'middle_name', headerName: 'Middle Name', flex: 1},
@@ -160,21 +152,13 @@ function Home() {
 
   return (
 
-<<<<<<< HEAD
-    <Box sx={{backgroundImage: `url(${bg1})`, backgroundSize: 'cover',height:'100vh' }}>
-        <Typography variant="h1">Hello {user?.profile.last_name}, {user?.profile.first_name ?? "Guest"}</Typography>
-        {
-            user ? (
-                <Box sx={{mt: 2, backgroundColor: 'azure', opacity:'0.9'}} >
-                        <Box sx={{display: 'flex', justifyContent: 'end', py: 2}}>
-=======
-    <Box sx={{ backgroundImage: `url(${bg1})`}}>
-        <Typography variant="h1">Hello {user?.profile.last_name}, {user?.profile.first_name ?? "Guest"}</Typography>
+    <Box sx={{ backgroundImage: `url(${bg1})`, backgroundSize: 'cover', height: '100vh'}}>
+        <Typography variant="h3" padding={'50px'} >Hello!! {user?.profile.last_name}, {user?.profile.first_name ?? "Guest"}</Typography>
         {
             user ? (
                 <Box sx={{mt: 2, backgroundColor: 'azure', opacity: '0.9'}}>
                     <Box sx={{display: 'flex', justifyContent: 'end', py: 2}}>
->>>>>>> 8104337c06823d2533d4ba8994bcfba5d13b21d9
+
                         <Button sx={{ mr: 5 }} ><Link to="/NursePage">Nurses</Link></Button>
                         <Button sx={{ mr: 5 }} ><Link to="/DentistPage">Dentist</Link></Button>
                         <Button sx={{mr: 5}}><Link to="/PromoPage"> Promo</Link></Button>
@@ -187,7 +171,7 @@ function Home() {
 
 
 
-                    <DataGrid sx={{height: '500px'}} columns={columns} rows={rows} />
+                    <DataGrid sx={{height: '600px', margin: '10px', padding:'20px', border:'5px solid lightblue'}} columns={columns} rows={rows} />
                     <Dialog open={!!createDialog}>
                         <DialogTitle>
                             Create a User

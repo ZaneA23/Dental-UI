@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
-import React, { useEffect, useState } from 'react'
-import { Link} from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import checkAuth from '../hoc/checkAuth'
-import { DataGrid } from '@mui/x-data-grid'
-import { useCookies } from 'react-cookie'
-import { procedure_destroy, procedure_index, procedure_store, procedure_update } from '../api/procedure'
-import { toast } from 'react-toastify'
+import { useDispatch, useSelector } from 'react-redux';
+import { useCookies } from 'react-cookie';
+import { DataGrid } from '@mui/x-data-grid';
+import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
+import { logout } from '../redux/authSlice';
+import { procedure_index, procedure_store, procedure_destroy, procedure_update } from '../api/procedure';
+import checkAuth from '../hoc/checkAuth';
+import { Navigate, useNavigate } from 'react-router-dom';
+import bg1 from './images/bg_1.jpg';
+import axios from 'axios';
 import $ from 'jquery'
-import { logout } from '../redux/authSlice'
-import { Navigate, useNavigate } from 'react-router-dom'
-import { Dropdown } from 'bootstrap'
-import { DropdownButton } from 'react-bootstrap'
-
 
 function ProcedurePage() {
     const [deleteProDialog, setProDeleteDialog] = useState(null);
@@ -29,14 +27,20 @@ function ProcedurePage() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-   
+
+    // Columns configuration for DataGrid
     const procedureColumns = [
-        {field: 'promo_id', headerName: 'Promo_id'},
-        {field: 'description', headerName: 'Description'},
-        {field: 'cost', headerName: 'cost'},
-        {field: 'actions', headerName: '', sortable: false, filterable: false, renderCell: params => (
-            <Box sx={{display: 'flex', gap: 1, justifyContent: 'center', alignItems: 'center', height: '100%'}}>
-                    <Button onClick={() => setProEditDialog({...params.row})} variant="contained" color="warning">Edit</Button>
+        { field: 'promo_id', headerName: 'Promo ID', flex: 1 },
+        { field: 'description', headerName: 'Description', flex: 1 },
+        { field: 'cost', headerName: 'Cost', flex: 1 },
+        {
+            field: 'actions',
+            headerName: '',
+            sortable: false,
+            filterable: false,
+            renderCell: params => (
+                <Box sx={{ display: 'flex', gap: 1, justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                    <Button onClick={() => setProEditDialog({ ...params.row })} variant="contained" color="warning">Edit</Button>
                     <Button onClick={() => setProDeleteDialog(params.row.id)} variant="contained" color="error">Delete</Button>
                 </Box>
             ),
@@ -45,88 +49,111 @@ function ProcedurePage() {
         }
     ];
 
+    // Fetch promo data on component mount
     useEffect(() => {
-        axios.get('http://localhost:8000/api/dentists').then(res => setPromos(res.data ?? []));
+        axios.get('http://localhost:8000/api/dentists')
+            .then(res => setPromos(res.data ?? []))
+            .catch(error => console.error("Error fetching promo data:", error));
     }, []);
 
-    const refreshData = () => {
-        procedure_index(cookies.AUTH_TOKEN).then(res => {
-            if (res?.ok) {
-                setProRows(res.data || []);
-            } else {
-                toast.error(res?.message ?? "Something went Wrong");
-            }
-        }).catch(error => {
-            console.error("Error fetching procedure data:", error);
-            toast.error("Failed to fetch procedure data.");
-        });
-    };
-
+    // Fetch procedure data on component mount and on refresh
     useEffect(() => {
         refreshData();
     }, []);
 
+    // Function to fetch procedure data
+    const refreshData = () => {
+        procedure_index(cookies.AUTH_TOKEN)
+            .then(res => {
+                if (res?.ok) {
+                    setProRows(res.data || []);
+                } else {
+                    toast.error(res?.message ?? "Something went wrong fetching procedure data.");
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching procedure data:", error);
+                toast.error("Failed to fetch procedure data.");
+            });
+    };
+
+    // Function to create a new procedure
     const onProcedureCreate = (e) => {
         e.preventDefault();
         if (!loading) {
             setLoading(true);
             const body = {
-                promo_id: promo,
+                promo_id: promo ,
                 description: $("#pro_description").val(),
                 cost: $("#cost").val()
             };
-            procedure_store(body).then(res => {
-                if (res?.ok) {
-                    toast.success(res?.message ?? "Procedure has been created");
-                    setProcedureDialog(false);
-                    setWarnings({});
-                    refreshData();
-                } else {
-                    toast.error(res?.message ?? "Something went wrong.");
-                    setWarnings(res?.errors);
-                }
-            }).finally(() => {
-                setLoading(false);
-            });
+            procedure_store(body)
+                .then(res => {
+                    if (res?.ok) {
+                        toast.success(res?.message ?? "Procedure has been created");
+                        setProcedureDialog(false);
+                        setWarnings({});
+                        refreshData();
+                    } else {
+                        toast.error(res?.message ?? "Failed to create procedure.");
+                        setWarnings(res?.errors);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error creating procedure:", error);
+                    toast.error("Failed to create procedure.");
+                })
+                .finally(() => setLoading(false));
         }
     };
 
+    // Function to delete a procedure
     const onProcedureDelete = () => {
         if (!loading && deleteProDialog) {
             setLoading(true);
-            procedure_destroy(deleteProDialog).then(res => {
-                if (res?.ok) {
-                    toast.success(res?.message ?? "Procedure has been deleted");
-                    refreshData();
-                    setProDeleteDialog(null);
-                } else {
+            procedure_destroy(deleteProDialog)
+                .then(res => {
+                    if (res?.ok) {
+                        toast.success(res?.message ?? "Procedure has been deleted");
+                        refreshData();
+                        setProDeleteDialog(null);
+                    } else {
+                        toast.error(res?.message ?? "Failed to delete procedure.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error deleting procedure:", error);
                     toast.error("Failed to delete procedure.");
-                }
-            }).finally(() => {
-                setLoading(false);
-            });
+                })
+                .finally(() => setLoading(false));
         }
     };
 
-    const onProcedureEdit = (e) => {
+
+    const onProcedureEdit = e => {
         e.preventDefault();
         if (!loading && editProDialog) {
             setLoading(true);
             const { id, promo_id, description, cost } = editProDialog;
-            procedure_update({ promo_id, description, cost }, id).then(res => {
-                if (res?.ok) {
-                    toast.success(res?.message ?? "Procedure has been updated");
-                    refreshData();
-                    setProEditDialog(null);
-                } else {
+            procedure_update({ promo_id, description, cost }, id)
+                .then(res => {
+                    if (res?.ok) {
+                        toast.success(res?.message ?? "Procedure has been updated");
+                        refreshData();
+                        setProEditDialog(null);
+                    } else {
+                        toast.error(res?.message ?? "Failed to update procedure.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error updating procedure:", error);
                     toast.error("Failed to update procedure.");
-                }
-            }).finally(() => {
-                setLoading(false);
-            });
+                })
+                .finally(() => setLoading(false));
         }
     };
 
+    // Function to handle logout
     const onLogout = () => {
         removeCookie("AUTH_TOKEN");
         dispatch(logout());
@@ -134,21 +161,21 @@ function ProcedurePage() {
         toast.success("Logged Out!");
     };
 
-  return (
-    <Box>
-        <Typography variant="h1">Hello {user?.profile.last_name}, {user?.profile.first_name ?? "Guest"}</Typography>
-        {
-            user ? (
-                <Box sx={{mt: 2}}>
-                    <Box sx={{display: 'flex', justifyContent: 'end', py: 2}}>
-                    <Button sx={{ mr: 5 }}><Link to="/Home">Users</Link></Button>                        
-                    <Button sx={{mr: 5}} onClick={() => setProcedureDialog(true)}>Create Procedures</Button>
-                    <Button sx={{ mr: 2 }} onClick={onLogout} variant="contained" color="error">Logout</Button>
+    return (
+        <Box sx={{ backgroundImage: `url(${bg1})`, backgroundSize: 'cover', height: '100vh' }}>
+            <Typography variant="h3" padding={'50px'} >Hello {user?.profile.last_name}, {user?.profile.first_name ?? "Guest"}</Typography>
+            {user ? (
+                <Box sx={{ mt: 2, backgroundColor: 'azure', opacity: '0.9' }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'end', py: 2 }}>
+                        <Button sx={{ mr: 5 }}><Link to="/Home">Users</Link></Button>
+                        <Button sx={{ mr: 5 }} onClick={() => setProcedureDialog(true)}>Create Procedure</Button>
+                        <Button sx={{ mr: 2 }} onClick={onLogout} variant="contained" color="error">Logout</Button>
                     </Box>
 
-                    <DataGrid sx={{ height: '500px' }} columns={procedureColumns} rows={procedureRows} />
+                    <DataGrid sx={{ height: '600px', margin: '10px', padding:'20px', border:'5px solid lightblue' }} columns={procedureColumns} rows={procedureRows} />
 
-                    <Dialog open={!!procedureDialog}>
+                    {/* Create Procedure Dialog */}
+                    <Dialog open={procedureDialog}>
                         <DialogTitle>Create a Procedure</DialogTitle>
                         <DialogContent>
                             <form onSubmit={onProcedureCreate}>
@@ -162,7 +189,7 @@ function ProcedurePage() {
                                             onChange={(e) => setPromo(e.target.value)}
                                             label="Promo"
                                         >
-                                            <MenuItem value={1}>Dentist 1</MenuItem>
+                                               <MenuItem value={1}>Dentist 1</MenuItem>
                                     <MenuItem value={2}>Dentist 2</MenuItem>
                                     <MenuItem value={3}>Dentist 3</MenuItem>
                                     <MenuItem value={4}>Dentist 4</MenuItem>
@@ -202,6 +229,7 @@ function ProcedurePage() {
                         </DialogActions>
                     </Dialog>
 
+                    {/* Edit Procedure Dialog */}
                     <Dialog open={!!editProDialog}>
                         <DialogTitle>Edit Procedure</DialogTitle>
                         <DialogContent>
@@ -216,7 +244,7 @@ function ProcedurePage() {
                                             onChange={(e) => setProEditDialog({ ...editProDialog, promo_id: e.target.value })}
                                             label="Promo"
                                         >
-                                           <MenuItem value={1}>Dentist 1</MenuItem>
+                                               <MenuItem value={1}>Dentist 1</MenuItem>
                                     <MenuItem value={2}>Dentist 2</MenuItem>
                                     <MenuItem value={3}>Dentist 3</MenuItem>
                                     <MenuItem value={4}>Dentist 4</MenuItem>
@@ -260,6 +288,7 @@ function ProcedurePage() {
                         </DialogActions>
                     </Dialog>
 
+                    {/* Delete Confirmation Dialog */}
                     <Dialog open={!!deleteProDialog}>
                         <DialogTitle>Confirm Delete</DialogTitle>
                         <DialogContent>

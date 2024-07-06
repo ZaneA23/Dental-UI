@@ -23,8 +23,8 @@ export const procedure_store = async (body) => {
 };
 
 export const procedure_destroy = async (id) => {
-  const response = await fetch(`${url}/procedures/${id}?_method=DELETE`, {
-    method: "POST",
+  const response = await fetch(`${url}/procedures/${id}`, {
+    method: "DELETE",
     headers: {
       Accept: 'application/json',
     },
@@ -33,8 +33,8 @@ export const procedure_destroy = async (id) => {
 };
 
 export const procedure_update = async (body, id) => {
-  const response = await fetch(`${url}/procedures/${id}?_method=PATCH`, {
-    method: 'POST',
+  const response = await fetch(`${url}/procedures/${id}`, {
+    method: 'PATCH',
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",

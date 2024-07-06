@@ -8,10 +8,7 @@ import { login } from '../redux/authSlice'
 import { toast } from 'react-toastify'
 import Nav from 'react-bootstrap/Nav'
 import bg1 from './images/bg_1.jpg'
-<<<<<<< HEAD
 
-=======
->>>>>>> 8104337c06823d2533d4ba8994bcfba5d13b21d9
 
 export default function Login() {
     const [name, setName] = useState("")
@@ -37,11 +34,9 @@ export default function Login() {
     }
 
   return (
-<<<<<<< HEAD
-    <Box sx={{minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundImage: `url(${bg1})`, backgroundSize: 'cover' }}>
-=======
+
     <Box sx={{minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundImage: `url(${bg1})`}}>
->>>>>>> 8104337c06823d2533d4ba8994bcfba5d13b21d9
+
         <Box sx={{height: 350, width: 500, boxShadow: 'black 0px 0px 20px', borderRadius: 2}}>
             <Typography variant="h4" sx={{textAlign: 'center', mt: 2}}>  
             <Box sx={{display: 'flex', justifyContent: 'end', alignItems: 'end', marginRight: '25px'}}>

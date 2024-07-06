@@ -8,16 +8,12 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { logout } from '../redux/authSlice';
 import { useNavigate } from 'react-router-dom';
-<<<<<<< HEAD
-import checkAuth from '../hoc/checkAuth'; 
-import { appointment_index, appointment_store, appointment_destroy, appointment_update } from '../api/appointment'; 
-import bg1 from './images/bg_1.jpg';
-=======
 import checkAuth from '../hoc/checkAuth'; // Import checkAuth correctly
 import { appointment_index, appointment_store, appointment_destroy, appointment_update } from '../api/appointment'; // Adjust your API imports as per your setup
 import bg1 from './images/bg_1.jpg';
+import { error } from 'jquery';
 
->>>>>>> 8104337c06823d2533d4ba8994bcfba5d13b21d9
+
 
 function AppointmentCrudPage() {
     const [dentists, setDentists] = useState([]);
@@ -109,7 +105,8 @@ function AppointmentCrudPage() {
 
     const onAppointDelete = () => {
         setLoading(true);
-        appointment_destroy(deleteAppDialog).then(res => {
+        appointment_destroy(deleteAppDialog)
+        .then(res => {
             if (res?.ok) {
                 toast.success(res?.message ?? "Appointment has been deleted.");
                 refreshData();
@@ -117,7 +114,12 @@ function AppointmentCrudPage() {
             } else {
                 toast.error("Failed to delete appointment.");
             }
-        }).finally(() => {
+        })
+        .catch(error => {
+            console.error("Error deleting nurse:", error);
+            toast.error("Failed to delete nurse");
+        })
+        .finally(() => {
             setLoading(false);
         });
     };
@@ -157,24 +159,18 @@ function AppointmentCrudPage() {
     };
 
     return (
-<<<<<<< HEAD
-        <Box sx={{ minHeight: '100vh', backgroundImage: `url(${bg1})`, backgroundSize: 'cover' }}>
-            <Typography variant="h1">Hello {user?.profile.last_name}, {user?.profile.first_name ?? "Guest"}</Typography>
-            {user ? (
-                <Box sx={{ mt: 2, backgroundColor: 'azure', opacity: '0.9' }}>
-=======
-        <Box sx={{ backgroundImage: `url(${bg1})`}}>
-            <Typography variant="h1">Hello {user?.profile.last_name}, {user?.profile.first_name ?? "Guest"}</Typography>
+
+        <Box sx={{ backgroundImage: `url(${bg1})`, backgroundSize: 'cover', height: '100vh' }}>
+            <Typography variant="h3" padding={'50px'} >Hello {user?.profile.last_name}, {user?.profile.first_name ?? "Guest"}</Typography>
             {user ? (
                 <Box sx={{ mt: 2, backgroundColor: 'azure', opacity: '0.9'}}>
->>>>>>> 8104337c06823d2533d4ba8994bcfba5d13b21d9
                     <Box sx={{ display: 'flex', justifyContent: 'end', py: 2 }}>
                         <Button sx={{ mr: 5 }} onClick={() => setAppointmentDialog(true)}>Create Appointment</Button>
                         <Button sx={{ mr: 5 }}><Link to="/Home">Users</Link></Button>
                         <Button sx={{ mr: 2 }} onClick={onLogout} variant="contained" color="error">Logout</Button>
                     </Box>
 
-                    <DataGrid sx={{ height: '500px' }} columns={appointmentColumns} rows={appointmentRows} />
+                    <DataGrid sx={{ height: '600px', margin: '10px', padding:'20px', border:'5px solid lightblue'}} columns={appointmentColumns} rows={appointmentRows} />
 
                     <Dialog open={appointmentDialog}>
                         <DialogTitle>Create an Appointment</DialogTitle>
@@ -280,19 +276,23 @@ function AppointmentCrudPage() {
                                     <Button type="submit" variant="contained" disabled={loading}>{loading ? "Loading..." : "Create"}</Button>
                                 </DialogActions>
                             </form>
+
+
                         </DialogContent>
                     </Dialog>
 
-                    {deleteAppDialog && (
-                        <Dialog open={Boolean(deleteAppDialog)}>
-                            <DialogTitle>Delete Confirmation</DialogTitle>
-                            <DialogContent>Are you sure you want to delete this appointment?</DialogContent>
-                            <DialogActions>
-                                <Button onClick={() => setAppDeleteDialog(null)}>Cancel</Button>
-                                <Button variant="contained" color="error" onClick={onAppointDelete} disabled={loading}>{loading ? "Loading..." : "Delete"}</Button>
-                            </DialogActions>
-                        </Dialog>
-                    )}
+                    <Dialog open={!!deleteAppDialog} onClose={() => setAppDeleteDialog(null)}>
+                        <DialogTitle>Are you sure?</DialogTitle>
+                        <DialogContent>
+                            <Typography>Do you want to delete this Appointment with ID: {deleteAppDialog}?</Typography>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={() => setAppDeleteDialog(null)}>Cancel</Button>
+                            <Button disabled={loading} onClick={onAppointDelete}>Confirm</Button>
+                        </DialogActions>
+                    </Dialog>
+
+
 
                     {editAppDialog && (
                         <Dialog open={Boolean(editAppDialog)}>

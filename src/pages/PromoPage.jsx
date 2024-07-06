@@ -10,14 +10,9 @@ import { toast } from 'react-toastify'
 import $ from 'jquery'
 import { logout } from '../redux/authSlice'
 import { Navigate, useNavigate } from 'react-router-dom'
-<<<<<<< HEAD
 import bg1 from './images/bg_1.jpg'
-=======
-import { Dropdown } from 'bootstrap'
-import { DropdownButton } from 'react-bootstrap'
-import { Description } from '@mui/icons-material'
-import bg1 from './images/bg_1.jpg';
->>>>>>> 8104337c06823d2533d4ba8994bcfba5d13b21d9
+
+
 
 
 
@@ -146,13 +141,13 @@ function PromoPage() {
 
   return (
 
-=======
-    <Box sx={{ backgroundImage: `url(${bg1})`}}>
-        <Typography variant="h1">Hello {user?.profile.last_name}, {user?.profile.first_name ?? "Guest"}</Typography>
+
+    <Box sx={{ backgroundImage: `url(${bg1})`, backgroundSize: 'cover', height: '100vh' }}>
+        <Typography variant="h3" padding={'50px'} >Hello {user?.profile.last_name}, {user?.profile.first_name ?? "Guest"}</Typography>
         {
             user ? (
                 <Box sx={{mt: 2, backgroundColor: 'azure', opacity: '0.9'}}>
->>>>>>> 8104337c06823d2533d4ba8994bcfba5d13b21d9
+
                     <Box sx={{display: 'flex', justifyContent: 'end', py: 2}}>
                         <Button sx={{mr: 5}} onClick={() => setPromoDialog(true)}>Create Promo</Button>
                         <Button sx={{ mr: 5 }} ><Link to="/Home">Users</Link></Button>
@@ -160,7 +155,7 @@ function PromoPage() {
                         <Button sx={{ mr: 2 }} onClick={onLogout} variant="contained" color="error">Logout</Button>
                     </Box>
 
-                    <DataGrid sx={{height: '500px'}} columns={promoColumns} rows={promo_rows}/>
+                    <DataGrid sx={{height: '600px', margin: '10px', padding:'20px', border:'5px solid lightblue'}} columns={promoColumns} rows={promo_rows}/>
 
                     <Dialog open={!!promoDialog}>
                         <DialogTitle>
@@ -220,13 +215,19 @@ function PromoPage() {
                             </Box>
 
                         </DialogContent>
+
                         <DialogActions>
                             <Button onClick={() => setPromoDialog(false)} color='info'>Close</Button>
                             <Button onClick={() => {$("#promosubmit_btn").trigger("click")}}>Create</Button>
-                        
                         </DialogActions>
 
                     </Dialog>
+
+
+
+
+
+
                     <Dialog open={!!deletePromoDialog}>
                         <DialogTitle>
                             Are you Sure?
@@ -241,6 +242,16 @@ function PromoPage() {
                             <Button disabled={loading} onClick={onPromoDelete}>Confirm</Button>
                         </DialogActions>
                     </Dialog>
+
+
+
+
+
+
+
+
+
+
                     <Dialog open={!!editPromoDialog}>
                         <DialogTitle>
                             Edit Promo

@@ -33,6 +33,7 @@ export const promo_destroy = async (id) => {
 };
 
 export const promo_update = async (body, id) => {
+  
   const response = await fetch(`${url}/promos/${id}?_method=PATCH`, {
     method: 'POST',
     headers: {
