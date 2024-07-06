@@ -13,6 +13,10 @@ import $ from 'jquery'
 import { logout } from '../redux/authSlice'
 import { Navigate, useNavigate, Link } from 'react-router-dom'
 import bg1 from './images/bg_1.jpg'
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8104337c06823d2533d4ba8994bcfba5d13b21d9
 
 function Home() {
     const [rows, setRows] = useState([])
@@ -30,8 +34,14 @@ function Home() {
     const navigate = useNavigate() 
 
     const columns = [
+<<<<<<< HEAD
         {field: 'id', headerName: 'ID' , flex: 1},
         {field: 'name', headerName: 'Username', flex: 1},
+=======
+        
+        {field: 'id', headerName: 'ID'},
+        {field: 'name', headerName: 'Username'},
+>>>>>>> 8104337c06823d2533d4ba8994bcfba5d13b21d9
         {field: 'email', headerName: 'Email'},
         {field: 'first_name', headerName: 'First Name', flex: 1},
         {field: 'middle_name', headerName: 'Middle Name', flex: 1},
@@ -41,7 +51,7 @@ function Home() {
         {field: 'birth_date', headerName: 'Birth Date', flex: 1},
         {field: 'actions', headerName: '', sortable: false, filterable: false, renderCell: params => (
             <Box sx={{display: 'flex', gap: 1, justifyContent: 'center', alignItems: 'center', height: '100%'}}>
-                <Button onClick={() => setEditDialog({...params.row})} variant="contained" color="warning">Edit</Button>
+                <Button onClick={() => setEditDialog({...params.row})} variant="contained" color="primary">Edit</Button>
                 <Button onClick={() => setDeleteDialog(params.row.id)} variant="contained" color="error">Delete</Button>
             </Box>
         ), minWidth: 200, hideable: false} 
@@ -150,12 +160,21 @@ function Home() {
 
   return (
 
+<<<<<<< HEAD
     <Box sx={{backgroundImage: `url(${bg1})`, backgroundSize: 'cover',height:'100vh' }}>
         <Typography variant="h1">Hello {user?.profile.last_name}, {user?.profile.first_name ?? "Guest"}</Typography>
         {
             user ? (
                 <Box sx={{mt: 2, backgroundColor: 'azure', opacity:'0.9'}} >
                         <Box sx={{display: 'flex', justifyContent: 'end', py: 2}}>
+=======
+    <Box sx={{ backgroundImage: `url(${bg1})`}}>
+        <Typography variant="h1">Hello {user?.profile.last_name}, {user?.profile.first_name ?? "Guest"}</Typography>
+        {
+            user ? (
+                <Box sx={{mt: 2, backgroundColor: 'azure', opacity: '0.9'}}>
+                    <Box sx={{display: 'flex', justifyContent: 'end', py: 2}}>
+>>>>>>> 8104337c06823d2533d4ba8994bcfba5d13b21d9
                         <Button sx={{ mr: 5 }} ><Link to="/NursePage">Nurses</Link></Button>
                         <Button sx={{ mr: 5 }} ><Link to="/DentistPage">Dentist</Link></Button>
                         <Button sx={{mr: 5}}><Link to="/PromoPage"> Promo</Link></Button>
@@ -175,7 +194,7 @@ function Home() {
                         </DialogTitle>
                         <DialogContent>
                             
-                            <Box component="form" onSubmit={onCreate} sx={{width: 300, mx: 'auto'}}>
+                            <Box component="form" onSubmit={onCreate} sx={{width: 300, mx: 'auto', padding: '25px'}}>
                                 <Box sx={{mt: 1}}>
                                     <TextField required id="name" fullWidth size="small" label="Username" />
                                     {

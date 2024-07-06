@@ -8,7 +8,10 @@ import { useCookies } from 'react-cookie'
 import { toast } from 'react-toastify'
 import { login } from '../redux/authSlice'
 import bg1 from './images/bg_1.jpg'
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8104337c06823d2533d4ba8994bcfba5d13b21d9
 
 export default function Register() {
 
@@ -52,7 +55,11 @@ export default function Register() {
     }
 
   return (
+<<<<<<< HEAD
     <Box sx={{minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems:  'center', backgroundImage: `url(${bg1})`, backgroundSize: 'cover'}}>
+=======
+    <Box sx={{minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems:  'center', backgroundImage: `url(${bg1})`}}>
+>>>>>>> 8104337c06823d2533d4ba8994bcfba5d13b21d9
         <Box sx={{height: 700, width: 500, boxShadow: 'black 0px 0px 20px', borderRadius: 2}}>
             <Typography variant="h4" sx={{textAlign: 'center', mt: 2}}>
                 Register

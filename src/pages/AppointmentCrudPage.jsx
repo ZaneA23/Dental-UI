@@ -8,9 +8,16 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { logout } from '../redux/authSlice';
 import { useNavigate } from 'react-router-dom';
+<<<<<<< HEAD
 import checkAuth from '../hoc/checkAuth'; 
 import { appointment_index, appointment_store, appointment_destroy, appointment_update } from '../api/appointment'; 
 import bg1 from './images/bg_1.jpg';
+=======
+import checkAuth from '../hoc/checkAuth'; // Import checkAuth correctly
+import { appointment_index, appointment_store, appointment_destroy, appointment_update } from '../api/appointment'; // Adjust your API imports as per your setup
+import bg1 from './images/bg_1.jpg';
+
+>>>>>>> 8104337c06823d2533d4ba8994bcfba5d13b21d9
 
 function AppointmentCrudPage() {
     const [dentists, setDentists] = useState([]);
@@ -45,7 +52,7 @@ function AppointmentCrudPage() {
         {
             field: 'actions', headerName: '', sortable: false, filterable: false, renderCell: params => (
                 <Box sx={{ display: 'flex', gap: 1, justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-                    <Button onClick={() => setAppEditDialog({ ...params.row })} variant="contained" color="warning">Edit</Button>
+                    <Button onClick={() => setAppEditDialog({ ...params.row })} variant="contained" color="primary">Edit</Button>
                     <Button onClick={() => setAppDeleteDialog(params.row.id)} variant="contained" color="error">Delete</Button>
                 </Box>
             ), minWidth: 200, hideable: false
@@ -150,10 +157,17 @@ function AppointmentCrudPage() {
     };
 
     return (
+<<<<<<< HEAD
         <Box sx={{ minHeight: '100vh', backgroundImage: `url(${bg1})`, backgroundSize: 'cover' }}>
             <Typography variant="h1">Hello {user?.profile.last_name}, {user?.profile.first_name ?? "Guest"}</Typography>
             {user ? (
                 <Box sx={{ mt: 2, backgroundColor: 'azure', opacity: '0.9' }}>
+=======
+        <Box sx={{ backgroundImage: `url(${bg1})`}}>
+            <Typography variant="h1">Hello {user?.profile.last_name}, {user?.profile.first_name ?? "Guest"}</Typography>
+            {user ? (
+                <Box sx={{ mt: 2, backgroundColor: 'azure', opacity: '0.9'}}>
+>>>>>>> 8104337c06823d2533d4ba8994bcfba5d13b21d9
                     <Box sx={{ display: 'flex', justifyContent: 'end', py: 2 }}>
                         <Button sx={{ mr: 5 }} onClick={() => setAppointmentDialog(true)}>Create Appointment</Button>
                         <Button sx={{ mr: 5 }}><Link to="/Home">Users</Link></Button>

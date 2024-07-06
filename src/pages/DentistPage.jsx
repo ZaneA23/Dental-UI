@@ -36,7 +36,7 @@ function DentistPage() {
             filterable: false,
             renderCell: params => (
                 <Box sx={{ display: 'flex', gap: 1, justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-                    <Button onClick={() => setEditDentistDialog(params.row)} variant="contained" color="warning">Edit</Button>
+                    <Button onClick={() => setEditDentistDialog(params.row)} variant="contained" color="primary">Edit</Button>
                     <Button onClick={() => setDeleteDentistDialog(params.row.id)} variant="contained" color="error">Delete</Button>
                 </Box>
             ),
@@ -161,10 +161,17 @@ function DentistPage() {
     };
 
     return (
+<<<<<<< HEAD
         <Box sx={{backgroundImage: `url(${bg1})`, backgroundSize: 'cover',height:'100vh'}}>
             <Typography variant="h1">Hello {user?.profile.last_name}, {user?.profile.first_name ?? "Guest"}</Typography>
             {user ? (
                 <Box sx={{ mt: 2 , backgroundColor: 'azure', opacity:'0.9'}}>
+=======
+        <Box sx={{ backgroundImage: `url(${bg1})`}}>
+            <Typography variant="h1">Hello {user?.profile.last_name}, {user?.profile.first_name ?? "Guest"}</Typography>
+            {user ? (
+                <Box sx={{ mt: 2, backgroundColor: 'azure', opacity: '0.9' }}>
+>>>>>>> 8104337c06823d2533d4ba8994bcfba5d13b21d9
                     <Box sx={{ display: 'flex', justifyContent: 'end', py: 2 }}>
                         <Button sx={{ mr: 5 }} onClick={() => setDentistDialog(true)}>Create Dentist</Button>
                         <Button sx={{ mr: 5 }}><Link to="/Home">Users</Link></Button>

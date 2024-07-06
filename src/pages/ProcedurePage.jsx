@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
-import { useCookies } from 'react-cookie';
-import { DataGrid } from '@mui/x-data-grid';
-import { toast } from 'react-toastify';
-import { Link } from 'react-router-dom';
-import $ from 'jquery';
-import { logout } from '../redux/authSlice';
-import { procedure_index, procedure_store, procedure_destroy, procedure_update } from '../api/procedure';
-import checkAuth from '../hoc/checkAuth';
-import { Navigate, useNavigate } from 'react-router-dom';
-import bg1 from './images/bg_1.jpg'
-import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { Link} from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import checkAuth from '../hoc/checkAuth'
+import { DataGrid } from '@mui/x-data-grid'
+import { useCookies } from 'react-cookie'
+import { procedure_destroy, procedure_index, procedure_store, procedure_update } from '../api/procedure'
+import { toast } from 'react-toastify'
+import $ from 'jquery'
+import { logout } from '../redux/authSlice'
+import { Navigate, useNavigate } from 'react-router-dom'
+import { Dropdown } from 'bootstrap'
+import { DropdownButton } from 'react-bootstrap'
+
 
 function ProcedurePage() {
     const [deleteProDialog, setProDeleteDialog] = useState(null);
@@ -29,17 +31,12 @@ function ProcedurePage() {
     const navigate = useNavigate();
    
     const procedureColumns = [
-        { field: 'promo_id', headerName: 'Promo ID', flex: 1 },
-        { field: 'description', headerName: 'Description', flex: 1 },
-        { field: 'cost', headerName: 'Cost', flex: 1 },
-        {
-            field: 'actions',
-            headerName: '',
-            sortable: false,
-            filterable: false,
-            renderCell: params => (
-                <Box sx={{ display: 'flex', gap: 1, justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-                    <Button onClick={() => setProEditDialog({ ...params.row })} variant="contained" color="warning">Edit</Button>
+        {field: 'promo_id', headerName: 'Promo_id'},
+        {field: 'description', headerName: 'Description'},
+        {field: 'cost', headerName: 'cost'},
+        {field: 'actions', headerName: '', sortable: false, filterable: false, renderCell: params => (
+            <Box sx={{display: 'flex', gap: 1, justifyContent: 'center', alignItems: 'center', height: '100%'}}>
+                    <Button onClick={() => setProEditDialog({...params.row})} variant="contained" color="warning">Edit</Button>
                     <Button onClick={() => setProDeleteDialog(params.row.id)} variant="contained" color="error">Delete</Button>
                 </Box>
             ),
@@ -137,15 +134,16 @@ function ProcedurePage() {
         toast.success("Logged Out!");
     };
 
-    return (
-        <Box sx={{ backgroundImage: `url(${bg1})`, backgroundSize: 'cover', height: '100vh' }}>
-            <Typography variant="h1">Hello {user?.profile.last_name}, {user?.profile.first_name ?? "Guest"}</Typography>
-            {user ? (
-                <Box sx={{ mt: 2, backgroundColor: 'azure', opacity: '0.9' }}>
-                    <Box sx={{ display: 'flex', justifyContent: 'end', py: 2 }}>
-                        <Button sx={{ mr: 5 }}><Link to="/Home">Users</Link></Button>
-                        <Button sx={{ mr: 5 }} onClick={() => setProcedureDialog(true)}>Create Procedure</Button>
-                        <Button sx={{ mr: 2 }} onClick={onLogout} variant="contained" color="error">Logout</Button>
+  return (
+    <Box>
+        <Typography variant="h1">Hello {user?.profile.last_name}, {user?.profile.first_name ?? "Guest"}</Typography>
+        {
+            user ? (
+                <Box sx={{mt: 2}}>
+                    <Box sx={{display: 'flex', justifyContent: 'end', py: 2}}>
+                    <Button sx={{ mr: 5 }}><Link to="/Home">Users</Link></Button>                        
+                    <Button sx={{mr: 5}} onClick={() => setProcedureDialog(true)}>Create Procedures</Button>
+                    <Button sx={{ mr: 2 }} onClick={onLogout} variant="contained" color="error">Logout</Button>
                     </Box>
 
                     <DataGrid sx={{ height: '500px' }} columns={procedureColumns} rows={procedureRows} />
