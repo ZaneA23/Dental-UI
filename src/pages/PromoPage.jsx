@@ -10,9 +10,8 @@ import { toast } from 'react-toastify'
 import $ from 'jquery'
 import { logout } from '../redux/authSlice'
 import { Navigate, useNavigate } from 'react-router-dom'
-import { Dropdown } from 'bootstrap'
-import { DropdownButton } from 'react-bootstrap'
-import { Description } from '@mui/icons-material'
+import bg1 from './images/bg_1.jpg'
+
 
 
 function PromoPage() {
@@ -33,11 +32,11 @@ function PromoPage() {
     
     
     const promoColumns = [
-        {field: 'discount', headerName: 'Discount'},
-        {field: 'description', headerName: 'Description'},
-        {field: 'price', headerName: 'Price'},
-        {field: 'promo_name', headerName: 'Promo Name'},
-        {field: 'promo_end', headerName: 'Promo End'},
+        {field: 'discount', headerName: 'Discount', flex: 1},
+        {field: 'description', headerName: 'Description', flex: 1},
+        {field: 'price', headerName: 'Price', flex: 1},
+        {field: 'promo_name', headerName: 'Promo Name', flex: 1},
+        {field: 'promo_end', headerName: 'Promo End', flex: 1},
         {field: 'actions', headerName: '', sortable: false, filterable: false, renderCell: params => (
             <Box sx={{display: 'flex', gap: 1, justifyContent: 'center', alignItems: 'center', height: '100%'}}>
                     <Button onClick={() => setPromoEditDialog({...params.row})} variant="contained" color="warning">Edit</Button>
@@ -139,11 +138,11 @@ function PromoPage() {
     
 
   return (
-    <Box>
+    <Box sx={{backgroundImage: `url(${bg1})`, backgroundSize: 'cover',height:'100vh'}}>
         <Typography variant="h1">Hello {user?.profile.last_name}, {user?.profile.first_name ?? "Guest"}</Typography>
         {
             user ? (
-                <Box sx={{mt: 2}}>
+                <Box sx={{mt: 2, backgroundColor: 'azure', opacity:'0.9'}}>
                     <Box sx={{display: 'flex', justifyContent: 'end', py: 2}}>
                         <Button sx={{mr: 5}} onClick={() => setPromoDialog(true)}>Create Promo</Button>
                         <Button sx={{ mr: 5 }} ><Link to="/Home">Users</Link></Button>

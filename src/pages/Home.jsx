@@ -7,13 +7,12 @@ import { useCookies } from 'react-cookie'
 import { nurse_destroy, nurse_index, nurse_store, nurse_update } from '../api/nurse'
 import { destroy, index, store, update } from '../api/user'
 import { appointment_destroy, appointment_index, appointment_store, appointment_update } from '../api/appointment'
-
 import { procedure_destroy, procedure_index, procedure_store, procedure_update } from '../api/procedure'
 import { toast } from 'react-toastify'
 import $ from 'jquery'
 import { logout } from '../redux/authSlice'
 import { Navigate, useNavigate, Link } from 'react-router-dom'
-
+import bg1 from './images/bg_1.jpg'
 
 function Home() {
     const [rows, setRows] = useState([])
@@ -31,15 +30,15 @@ function Home() {
     const navigate = useNavigate() 
 
     const columns = [
-        {field: 'id', headerName: 'ID'},
-        {field: 'name', headerName: 'Username'},
+        {field: 'id', headerName: 'ID' , flex: 1},
+        {field: 'name', headerName: 'Username', flex: 1},
         {field: 'email', headerName: 'Email'},
-        {field: 'first_name', headerName: 'First Name'},
-        {field: 'middle_name', headerName: 'Middle Name'},
-        {field: 'last_name', headerName: 'Last Name'},
-        {field: 'contact', headerName: 'Contact'},
-        {field: 'address', headerName: 'Address'},
-        {field: 'birth_date', headerName: 'Birth Date'},
+        {field: 'first_name', headerName: 'First Name', flex: 1},
+        {field: 'middle_name', headerName: 'Middle Name', flex: 1},
+        {field: 'last_name', headerName: 'Last Name', flex: 1},
+        {field: 'contact', headerName: 'Contact', flex: 1},
+        {field: 'address', headerName: 'Address', flex: 1},
+        {field: 'birth_date', headerName: 'Birth Date', flex: 1},
         {field: 'actions', headerName: '', sortable: false, filterable: false, renderCell: params => (
             <Box sx={{display: 'flex', gap: 1, justifyContent: 'center', alignItems: 'center', height: '100%'}}>
                 <Button onClick={() => setEditDialog({...params.row})} variant="contained" color="warning">Edit</Button>
@@ -151,11 +150,11 @@ function Home() {
 
   return (
 
-    <Box>
+    <Box sx={{backgroundImage: `url(${bg1})`, backgroundSize: 'cover',height:'100vh' }}>
         <Typography variant="h1">Hello {user?.profile.last_name}, {user?.profile.first_name ?? "Guest"}</Typography>
         {
             user ? (
-                <Box sx={{mt: 2}}>
+                <Box sx={{mt: 2, backgroundColor: 'azure', opacity:'0.9'}} >
                         <Box sx={{display: 'flex', justifyContent: 'end', py: 2}}>
                         <Button sx={{ mr: 5 }} ><Link to="/NursePage">Nurses</Link></Button>
                         <Button sx={{ mr: 5 }} ><Link to="/DentistPage">Dentist</Link></Button>

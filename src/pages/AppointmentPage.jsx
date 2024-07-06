@@ -5,17 +5,19 @@ import axios from 'axios';
 import { appointment_store } from '../api/appointment';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+import bg1 from './images/bg_1.jpg'
+
 
 export default function Appointment() {
     const [dentist, setDentist] = useState('');
     const [nurse, setNurse] = useState('');
-    const [userName, setUserName] = useState('');
     const [procedure, setProcedure] = useState('');
     const [treatmentDate, setTreatmentDate] = useState('');
     const [treatmentTime, setTreatmentTime] = useState('');
+    const [name, setName] = useState('');
+    const [address,setAddress] = useState('');
     const [dentists, setDentists] = useState([]);
     const [nurses, setNurses] = useState([]);
-    const [users, setUsers] = useState([]);
     const [procedures, setProcedures] = useState([]);
     const [warnings, setWarnings] = useState({});
     const [loading, setLoading] = useState(false);
@@ -25,17 +27,17 @@ export default function Appointment() {
     useEffect(() => {
         axios.get('http://localhost:8000/api/dentists').then(res => setDentists(res.data ?? []));
         axios.get('http://localhost:8000/api/nurses').then(res => setNurses(res.data ?? []));
-        axios.get('http://localhost:8000/api/users').then(res => setUsers(res.data ?? []));
         axios.get('http://localhost:8000/api/procedures').then(res => setProcedures(res.data ?? []));
     }, []);
-
+    
     const onSubmit = (e) => {
         e.preventDefault();
         if (!loading) {
             const body = {
+                name: name,
+                address: address,
                 dentist_id: dentist,
                 nurse_id: nurse,
-                user_id: userName,
                 procedure_id: procedure,
                 treatment_date: treatmentDate,
                 treatment_time: treatmentTime,
@@ -45,8 +47,7 @@ export default function Appointment() {
                 console.log(res);
                 if (res?.ok) {
                     toast.success(res?.message ?? "Appointment has been created!!");
-                    dispatch(login(res.data));
-                    navigate("/Home");
+                    navigate("/HomePage");
                 } else {
                     toast.error(res?.message ?? "Something went wrong.");
                     setWarnings(res?.errors);
@@ -58,12 +59,37 @@ export default function Appointment() {
     };
 
     return (
-        <Box sx={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <Box sx={{ height: 650, width: 500, boxShadow: 'black 0px 0px 20px', borderRadius: 2 }}>
+        <Box sx={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' , backgroundImage: `url(${bg1})` , backgroundSize: 'cover' }}>
+            <Box sx={{ height: 500, width: 500, boxShadow: 'black 0px 0px 20px', borderRadius: 2 }}>
                 <Typography variant="h4" sx={{ textAlign: 'center', mt: 2 }}>
                     Appointment
                 </Typography>
                 <Box component="form" onSubmit={onSubmit} sx={{ width: 300, mx: 'auto' }}>
+                <Box sx={{ mt: 1 }}>
+                        <TextField
+                            required
+                            id="name"
+                            fullWidth
+                            size="small"
+                             label="Full Name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                        {warnings?.name && <Typography sx={{ fontSize: 12 }} component="small" color="error">{warnings.name}</Typography>}
+                    </Box>
+                    <Box sx={{ mt: 1 }}>
+                        <TextField
+                            
+                            required
+                            id="address"
+                            fullWidth
+                            size="small"
+                            label="Address"
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
+                        />
+                        {warnings?.address && <Typography sx={{ fontSize: 12 }} component="small" color="error">{warnings.address}</Typography>}
+                    </Box>
                     <Box sx={{ mt: 1 }}>
                         <FormControl fullWidth size="small">
                             <InputLabel id="dentist-label">Dentist</InputLabel>
@@ -74,9 +100,13 @@ export default function Appointment() {
                                 onChange={(e) => setDentist(e.target.value)}
                                 label="Dentist"
                             >
-                                {Array.isArray(dentists) && dentists.map((d) => (
-                                    <MenuItem key={d.id} value={d.id}>{d.name}</MenuItem>
-                                ))}
+                                
+                                    <MenuItem value={1}>Dentist 1</MenuItem>
+                                    <MenuItem value={2}>Dentist 2</MenuItem>
+                                    <MenuItem value={3}>Dentist 3</MenuItem>
+                                    <MenuItem value={4}>Dentist 4</MenuItem>
+                                    <MenuItem value={5}>Dentist 5</MenuItem>
+                              
                             </Select>
                         </FormControl>
                         {warnings?.dentist_id && <Typography sx={{ fontSize: 12 }} component="small" color="error">{warnings.dentist_id}</Typography>}
@@ -91,29 +121,15 @@ export default function Appointment() {
                                 onChange={(e) => setNurse(e.target.value)}
                                 label="Nurse"
                             >
-                                {Array.isArray(nurses) && nurses.map((n) => (
-                                    <MenuItem key={n.id} value={n.id}>{n.name}</MenuItem>
-                                ))}
+                                <MenuItem value={1}>Nurse 1</MenuItem>
+                                <MenuItem value={2}>Nurse 2</MenuItem>
+                                <MenuItem value={3}>Nurse 3</MenuItem>
+                                <MenuItem value={4}>Nurse 4</MenuItem>
+                                <MenuItem value={5}>Nurse 5</MenuItem>
+                              
                             </Select>
                         </FormControl>
                         {warnings?.nurse_id && <Typography sx={{ fontSize: 12 }} component="small" color="error">{warnings.nurse_id}</Typography>}
-                    </Box>
-                    <Box sx={{ mt: 1 }}>
-                        <FormControl fullWidth size="small">
-                            <InputLabel id="userName-label">Name</InputLabel>
-                            <Select
-                                labelId="userName-label"
-                                id="userName"
-                                value={userName}
-                                onChange={(e) => setUserName(e.target.value)}
-                                label="Name"
-                            >
-                                {Array.isArray(users) && users.map((u) => (
-                                    <MenuItem key={u.id} value={u.id}>{u.name}</MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
-                        {warnings?.user_id && <Typography sx={{ fontSize: 12 }} component="small" color="error">{warnings.user_id}</Typography>}
                     </Box>
                     <Box sx={{ mt: 1 }}>
                         <FormControl fullWidth size="small">
@@ -125,9 +141,12 @@ export default function Appointment() {
                                 onChange={(e) => setProcedure(e.target.value)}
                                 label="Procedure"
                             >
-                                {Array.isArray(procedures) && procedures.map((p) => (
-                                    <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>
-                                ))}
+                                <MenuItem value={1}>procedure 1</MenuItem>
+                                <MenuItem value={2}>Procedure 2</MenuItem>
+                                <MenuItem value={3}>Procedure 3</MenuItem>
+                                <MenuItem value={4}>Procedure 4</MenuItem>
+                                <MenuItem value={5}>Procedure 5</MenuItem>
+                               
                             </Select>
                         </FormControl>
                         {warnings?.procedure_id && <Typography sx={{ fontSize: 12 }} component="small" color="error">{warnings.procedure_id}</Typography>}

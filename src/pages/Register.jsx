@@ -7,6 +7,8 @@ import { useDispatch } from 'react-redux'
 import { useCookies } from 'react-cookie'
 import { toast } from 'react-toastify'
 import { login } from '../redux/authSlice'
+import bg1 from './images/bg_1.jpg'
+
 
 export default function Register() {
 
@@ -50,8 +52,8 @@ export default function Register() {
     }
 
   return (
-    <Box sx={{minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems:  'center'}}>
-        <Box sx={{height: 650, width: 500, boxShadow: 'black 0px 0px 20px', borderRadius: 2}}>
+    <Box sx={{minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems:  'center', backgroundImage: `url(${bg1})`, backgroundSize: 'cover'}}>
+        <Box sx={{height: 700, width: 500, boxShadow: 'black 0px 0px 20px', borderRadius: 2}}>
             <Typography variant="h4" sx={{textAlign: 'center', mt: 2}}>
                 Register
 

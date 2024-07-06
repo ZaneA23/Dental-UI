@@ -9,21 +9,16 @@ import { logout } from '../redux/authSlice';
 import { useNavigate } from 'react-router-dom';
 import { dentist_destroy, dentist_index, dentist_store, dentist_update } from '../api/dentist';
 import checkAuth from '../hoc/checkAuth';
+import bg1 from './images/bg_1.jpg'
 
 function DentistPage() {
     const [dentistDialog, setDentistDialog] = useState(false);
     const [deleteDentistDialog, setDeleteDentistDialog] = useState(null);
     const [editDentistDialog, setEditDentistDialog] = useState(null);
-    const [dentistRows, setDentistRows] = useState([]); // Initialize as empty array
+    const [dentistRows, setDentistRows] = useState([]);
+    const [formValues, setFormValues] = useState({ name: '', address: '', hire_date: '' });
     const [warnings, setWarnings] = useState({});
     const [loading, setLoading] = useState(false);
-    const [formValues, setFormValues] = useState({
-        user_id: '',
-        name: '',
-        address: '',
-        hire_date: ''
-    });
-
     const user = useSelector(state => state.auth.user);
     const [cookies, setCookie, removeCookie] = useCookies();
     const dispatch = useDispatch();
@@ -52,14 +47,14 @@ function DentistPage() {
 
     useEffect(() => {
         refreshData();
-    }, []); // Empty dependency array to fetch data once when component mounts
+    }, []);
 
     const refreshData = () => {
         setLoading(true);
         dentist_index(cookies.AUTH_TOKEN)
             .then(res => {
                 if (res?.ok) {
-                    setDentistRows(res.data || []); // Update dentistRows state with fetched data
+                    setDentistRows(res.data || []);
                 } else {
                     toast.error(res?.message ?? "Failed to fetch dentist data");
                 }
@@ -81,7 +76,7 @@ function DentistPage() {
                     toast.success(res?.message ?? "Dentist created successfully");
                     setDentistDialog(false);
                     setWarnings({});
-                    refreshData(); // Refresh data after creating dentist
+                    refreshData();
                 } else {
                     toast.error(res?.message ?? "Failed to create dentist");
                     setWarnings(res?.errors);
@@ -102,7 +97,7 @@ function DentistPage() {
             .then(res => {
                 if (res?.ok) {
                     toast.success(res?.message ?? "Dentist deleted successfully");
-                    refreshData(); // Refresh data after deleting dentist
+                    refreshData();
                     setDeleteDentistDialog(null);
                 } else {
                     toast.error("Failed to delete dentist");
@@ -120,15 +115,14 @@ function DentistPage() {
     const onUpdateDentist = () => {
         setLoading(true);
         dentist_update({
-            user_id: editDentistDialog.user_id,
             name: editDentistDialog.name,
             address: editDentistDialog.address,
             hire_date: editDentistDialog.hire_date,
-        }, editDentistDialog.id)
+            }, editDentistDialog.id)
             .then(res => {
                 if (res?.ok) {
                     toast.success(res?.message ?? "Dentist updated successfully");
-                    refreshData(); // Refresh data after updating dentist
+                    refreshData();
                     setEditDentistDialog(null);
                 } else {
                     toast.error("Failed to update dentist");
@@ -158,20 +152,27 @@ function DentistPage() {
         }));
     };
 
+    const handleEditInputChange = (e) => {
+        const { id, value } = e.target;
+        setEditDentistDialog(prevState => ({
+            ...prevState,
+            [id]: value
+        }));
+    };
+
     return (
-        <Box>
+        <Box sx={{backgroundImage: `url(${bg1})`, backgroundSize: 'cover',height:'100vh'}}>
             <Typography variant="h1">Hello {user?.profile.last_name}, {user?.profile.first_name ?? "Guest"}</Typography>
             {user ? (
-                <Box sx={{ mt: 2 }}>
+                <Box sx={{ mt: 2 , backgroundColor: 'azure', opacity:'0.9'}}>
                     <Box sx={{ display: 'flex', justifyContent: 'end', py: 2 }}>
                         <Button sx={{ mr: 5 }} onClick={() => setDentistDialog(true)}>Create Dentist</Button>
                         <Button sx={{ mr: 5 }}><Link to="/Home">Users</Link></Button>
                         <Button sx={{ mr: 2 }} onClick={onLogout} variant="contained" color="error">Logout</Button>
                     </Box>
 
-                        <DataGrid sx={{ height: '500px' }} columns={dentistColumns} rows={dentistRows} />
-  
-                    
+                    <DataGrid sx={{ height: '500px' }} columns={dentistColumns} rows={dentistRows} />
+
                     <Dialog open={!!dentistDialog}>
                         <DialogTitle>Create A Dentist</DialogTitle>
                         <DialogContent>
@@ -197,6 +198,7 @@ function DentistPage() {
                             <Button onClick={() => setDentistDialog(false)} color='info'>Close</Button>
                         </DialogActions>
                     </Dialog>
+
                     <Dialog open={!!deleteDentistDialog}>
                         <DialogTitle>Are you Sure?</DialogTitle>
                         <DialogContent>
@@ -207,20 +209,21 @@ function DentistPage() {
                             <Button disabled={loading} onClick={onDeleteDentist}>Confirm</Button>
                         </DialogActions>
                     </Dialog>
+
                     <Dialog open={!!editDentistDialog}>
                         <DialogTitle>Edit Dentist</DialogTitle>
                         <DialogContent>
                             <Box component="form" onSubmit={(e) => { e.preventDefault(); onUpdateDentist(); }} sx={{ width: 300, mx: 'auto' }}>
                                 <Box sx={{ mt: 1 }}>
-                                    <TextField required id="name" fullWidth size="small" label="Dentist Name" value={formValues.name} onChange={handleInputChange} />
+                                    <TextField id="name" onChange={handleEditInputChange} value={editDentistDialog?.name ?? ""} fullWidth size="small" label="Name" />
                                     {warnings?.name && <Typography sx={{ fontSize: 12 }} component="small" color="error">{warnings.name}</Typography>}
                                 </Box>
                                 <Box sx={{ mt: 1 }}>
-                                    <TextField required id="address" fullWidth size="small" label="Address" value={formValues.address} onChange={handleInputChange} />
+                                    <TextField id="address" onChange={handleEditInputChange} value={editDentistDialog?.address ?? ""} fullWidth size="small" label="Address" />
                                     {warnings?.address && <Typography sx={{ fontSize: 12 }} component="small" color="error">{warnings.address}</Typography>}
                                 </Box>
                                 <Box sx={{ mt: 1 }}>
-                                    <TextField required id="hire_date" fullWidth size="small" label="Hire Date" type="date" value={formValues.hire_date} onChange={handleInputChange} />
+                                    <TextField id="hire_date" onChange={handleEditInputChange} value={editDentistDialog?.hire_date ?? ""} fullWidth size="small" label="Hire Date" type="date" />
                                     {warnings?.hire_date && <Typography sx={{ fontSize: 12 }} component="small" color="error">{warnings.hire_date}</Typography>}
                                 </Box>
                                 <Box sx={{ mt: 1, textAlign: 'center' }}>
